@@ -1,0 +1,27 @@
+title: InventoryFramework
+description: Server-authoritative inventory and crafting backend for Unity, Godot, and Unreal Engine.
+remote_theme: just-the-docs/just-the-docs@v0.10.0
+
+url: "https://b-altuncay.github.io"
+baseurl: "/InventoryFramework"   # change this to match your public repo name
+
+color_scheme: dark
+search_enabled: true
+heading_anchors: true
+
+aux_links:
+  "NuGet SDK":
+    - "https://www.nuget.org/packages/InventoryFramework.SDK"
+  "NuGet Unity":
+    - "https://www.nuget.org/packages/InventoryFramework.UnityAdapter"
+  "NuGet Godot":
+    - "https://www.nuget.org/packages/InventoryFramework.GodotAdapter"
+  "NuGet Unreal":
+    - "https://www.nuget.org/packages/InventoryFramework.UnrealAdapter"
+aux_links_new_tab: true
+
+footer_content: 'Copyright &copy; 2026 Batuhan Altuncay &mdash; <a href="mailto:mbaltuncay99@gmail.com">Contact for licensing</a>'
+
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
