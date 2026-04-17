@@ -14,7 +14,7 @@ This guide covers adding InventoryFramework to a Unity project using the `Invent
 
 - Unity 2021.3 LTS or later
 - .NET Standard 2.1 scripting backend (IL2CPP or Mono)
-- A running InventoryFramework server (see [Server Configuration](server-configuration.md))
+- A running InventoryFramework server (see [server-configuration.md](server-configuration.md))
 
 ---
 
@@ -27,11 +27,12 @@ Copy the contents of the `unity-package/` directory into your Unity project's `A
 - `InventoryFramework.UnityAdapter.dll`
 - All required gRPC dependencies
 
-### Option B — NuGet
+### Option B — DLL References
 
-```bash
-dotnet add package InventoryFramework.UnityAdapter
-```
+Build the solution in Release mode. Copy the following DLLs to `Assets/Plugins/`:
+- `InventoryFramework.SDK.dll`
+- `InventoryFramework.UnityAdapter.dll`
+- `Grpc.Net.Client.dll`, `Grpc.Core.Api.dll`, `Google.Protobuf.dll`
 
 ---
 
@@ -189,6 +190,60 @@ if (preview.CanCraftRequestedCount)
         allowPartial: false,
         requiredStation: "workbench");
 }
+```
+
+---
+
+## Durability
+
+Durability is exposed on each slot in the inventory snapshot:
+
+```csharp
+var snapshot = await _facade.RefreshAsync();
+
+foreach (var container in snapshot.Containers)
+{
+    foreach (var slot in container.Slots)
+    {
+        if (!slot.IsEmpty && slot.CurrentDurability.HasValue)
+        {
+            Debug.Log($"Slot {slot.Index}: {slot.ItemDefinitionId} — " +
+                      $"durability {slot.CurrentDurability.Value:F1}");
+        }
+    }
+}
+```
+
+---
+
+## Weight
+
+Container weight is available on every container snapshot:
+
+```csharp
+foreach (var container in snapshot.Containers)
+{
+    var capacity = container.WeightCapacity.HasValue
+        ? container.WeightCapacity.Value.ToString("F1")
+        : "∞";
+
+    Debug.Log($"Container {container.ContainerId}: " +
+              $"{container.CurrentWeight:F1} / {capacity} kg");
+}
+```
+
+---
+
+## Player Progression (Recipe Keys)
+
+```csharp
+// Unlock a recipe key for a player
+await _facade.UnlockRecipeKeyAsync(actorId: "player-123", unlockKey: "tier2_crafting");
+
+// Check progression
+var progression = await _facade.GetPlayerProgressionAsync("player-123");
+foreach (var entry in progression.UnlockedKeys)
+    Debug.Log($"Unlocked: {entry.UnlockKey} at {entry.UnlockedAtUtc}");
 ```
 
 ---

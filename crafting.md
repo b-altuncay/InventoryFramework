@@ -80,6 +80,8 @@ var result = await client.BrowseRecipesAsync(
     category: "woodworking"); // optional filter
 ```
 
+`BrowseRecipesResult.Recipes` is a list of `BrowseRecipesItemResult` with `Id`, `DisplayName`, `CraftingCategory`, and `RequiredStation`.
+
 ### Get recipe details
 
 Returns full ingredient and output information for a single recipe.
@@ -90,6 +92,8 @@ var result = await client.GetRecipeDetailsAsync(
     recipeId: "plank_recipe");
 ```
 
+`GetRecipeDetailsResult` exposes `Ingredients` (`IReadOnlyList<RecipeIngredientDetailModel>`) and `Outputs` (`IReadOnlyList<RecipeOutputDetailModel>`).
+
 ### Check available recipes (Pro+)
 
 Returns all craftable recipes for the actor's current inventory, including per-ingredient availability.
@@ -97,7 +101,7 @@ Returns all craftable recipes for the actor's current inventory, including per-i
 ```csharp
 var result = await client.GetAvailableRecipesAsync(
     inventoryId: "inv-player-123",
-    requestedCraftCount: 1);
+    requestedCraftCount: 1);   // how many times to craft
 ```
 
 Each `AvailableRecipeItemResult` reports:

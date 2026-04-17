@@ -13,7 +13,7 @@ This guide covers adding InventoryFramework to an Unreal Engine project using C#
 ## Requirements
 
 - Unreal Engine 5.x
-- A running InventoryFramework server (see [Server Configuration](server-configuration.md))
+- A running InventoryFramework server (see [server-configuration.md](server-configuration.md))
 - .NET 8 runtime accessible from the Unreal project (service process or plugin bridge)
 
 ---

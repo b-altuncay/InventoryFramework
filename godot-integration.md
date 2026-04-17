@@ -14,7 +14,7 @@ This guide covers adding InventoryFramework to a Godot 4 project using C#.
 
 - Godot 4.x with .NET (Mono) enabled
 - .NET 6 or .NET 7 (Godot 4.x uses .NET 6 by default)
-- A running InventoryFramework server (see [Server Configuration](server-configuration.md))
+- A running InventoryFramework server (see [server-configuration.md](server-configuration.md))
 
 ---
 
@@ -85,6 +85,15 @@ public partial class InventoryManager : Node
 ```
 
 Register `InventoryManager` as an autoload in **Project → Project Settings → Autoload**.
+
+---
+
+## Accessing from Other Nodes
+
+```csharp
+var manager = GetNode<InventoryManager>("/root/InventoryManager");
+var snapshot = await manager.Facade.RefreshAsync();
+```
 
 ---
 
@@ -165,7 +174,7 @@ if (result.Succeeded)
 await manager.Facade.SortContainerAsync("src-id", sortMode: 0);
 ```
 
-### Crafting
+### Craft preview + craft
 
 ```csharp
 var preview = await manager.Facade.PreviewCraftItemsAsync(
@@ -187,6 +196,74 @@ if (preview.CanCraftRequestedCount)
         allowPartial: false,
         requiredStation: "workbench");
 }
+```
+
+---
+
+## Displaying Inventory in UI
+
+```csharp
+var snapshot = await manager.Facade.RefreshAsync();
+
+foreach (var container in snapshot.Containers)
+{
+    GD.Print($"Container: {container.ContainerId}");
+
+    foreach (var slot in container.Slots)
+    {
+        if (slot.IsEmpty) continue;
+
+        var durabilityText = slot.CurrentDurability.HasValue
+            ? $" (dur: {slot.CurrentDurability.Value:F0})"
+            : string.Empty;
+
+        GD.Print($"  Slot {slot.Index}: {slot.ItemDefinitionId} x{slot.Quantity}{durabilityText}");
+    }
+
+    if (container.WeightCapacity.HasValue)
+        GD.Print($"  Weight: {container.CurrentWeight:F1} / {container.WeightCapacity.Value:F1}");
+}
+```
+
+---
+
+## Recipe Browsing
+
+```csharp
+// All recipes in a category
+var browse = await manager.Facade.BrowseRecipesAsync(
+    craftingCategory: "woodworking",
+    requiredStation: "workbench");
+
+foreach (var recipe in browse.Recipes)
+    GD.Print($"  {recipe.Id}: {recipe.DisplayName}");
+
+// Available recipes (filtered by what the player can currently craft)
+var available = await manager.Facade.GetAvailableRecipesAsync(
+    sourceContainerId: "src-id",
+    targetContainerId: "dst-id",
+    requestedCraftCount: 1,
+    craftingCategory: "woodworking",
+    requiredStation: "workbench");
+
+foreach (var r in available.Recipes)
+    GD.Print($"  {r.DisplayName}: can craft = {r.CanCraftRequestedCount}");
+```
+
+---
+
+## Player Progression
+
+```csharp
+// Unlock a recipe tier (admin operation)
+await manager.Facade.UnlockRecipeKeyAsync(
+    targetActorId: "player-456",
+    unlockKey: "tier2_crafting");
+
+// Read progression
+var progression = await manager.Facade.GetPlayerProgressionAsync("player-456");
+foreach (var key in progression.UnlockedKeys)
+    GD.Print($"Unlocked: {key.UnlockKey} at {key.UnlockedAtUtc}");
 ```
 
 ---
