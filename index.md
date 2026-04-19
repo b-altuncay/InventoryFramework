@@ -95,6 +95,7 @@ Same four lines work on Godot and Unreal — just swap the facade class name.
 
 | | Demo | Pro | Enterprise |
 |---|:---:|:---:|:---:|
+| Binary (server + SDK + adapters) | ✓ | ✓ | ✓ |
 | File-based persistence | ✓ | ✓ | ✓ |
 | SQLite persistence | | ✓ | ✓ |
 | SQL Server / PostgreSQL | | | ✓ |
@@ -102,10 +103,11 @@ Same four lines work on Godot and Unreal — just swap the facade class name.
 | Item affixes (rolled modifiers) | ✓ | ✓ | ✓ |
 | Player progression / recipe unlock keys | | ✓ | ✓ |
 | Real-time events via SignalR | ✓ | ✓ | ✓ |
-| Source code | | ✓ | ✓ |
-| Priority support | | | ✓ |
+| Max slots per container | 20 | Unlimited | Unlimited |
+| Studio license | Single project | Single studio | Multi-studio |
+| Support | Community | E-mail | Priority + SLA |
 
-Licensing: contact [mbaltuncay99@gmail.com](mailto:mbaltuncay99@gmail.com)
+Licensing: `Demo` (free) · `Pro` · `Enterprise` — [mbaltuncay99@gmail.com](mailto:mbaltuncay99@gmail.com)
 
 ---
 
