@@ -6,11 +6,94 @@ nav_order: 3
 
 # Production Deployment
 
-This guide covers self-hosting the InventoryFramework server in production using Docker.
+---
+
+## Option A — Pre-built Demo binary (no Docker, no license required)
+
+The fastest way to evaluate InventoryFramework. Download the binary, run it — no setup needed.
+
+### 1. Download
+
+Go to the [latest GitHub Release](https://github.com/b-altuncay/InventoryFramework/releases/latest) and download the archive for your platform:
+
+| File | Platform |
+|---|---|
+| `InventoryFramework-Server-Demo-linux-x64-vX.Y.Z.zip` | Linux x64 |
+| `InventoryFramework-Server-Demo-win-x64-vX.Y.Z.zip` | Windows x64 |
+
+**Prerequisite:** [.NET 8 Runtime](https://dotnet.microsoft.com/download/dotnet/8) must be installed.
+
+### 2. Extract and run
+
+**Windows:**
+```
+Unzip → double-click start-demo.bat
+```
+
+**Linux:**
+```bash
+unzip InventoryFramework-Server-Demo-linux-x64-vX.Y.Z.zip -d inventoryframework
+cd inventoryframework
+chmod +x start-demo.sh InventoryFramework.Server
+./start-demo.sh
+```
+
+The server starts on:
+
+| Endpoint | URL |
+|---|---|
+| gRPC-Web (cleartext) | `http://localhost:5210` |
+| gRPC (cleartext) | `http://localhost:7289` |
+| Health check | `http://localhost:5210/health` |
+
+### 3. Configure API keys
+
+Edit `appsettings.json` before running:
+
+```json
+"Auth": {
+  "ApiKeys": [
+    { "Key": "sk-admin-CHANGE-THIS", "IsAdmin": true,  "Description": "Admin" },
+    { "Key": "sk-game-CHANGE-THIS",  "IsAdmin": false, "Description": "Game server" }
+  ]
+}
+```
+
+### 4. Demo tier limits
+
+| Feature | Demo |
+|---|---|
+| Inventory CRUD, stack ops, slot locking | Full access |
+| Basic crafting | Enabled |
+| Craft preview, recipe availability | Disabled |
+| Trading, QuickStore, Player Progression | Disabled |
+| Concurrent actors | Max 3 |
+| Items per actor | Max 50 |
+
+### 5. Upgrade to Pro
+
+1. [Activate your license](https://inventoryframework-license.workers.dev/activate) — download `license.json`
+2. Place `license.json` next to the server executable
+3. Set `INVENTORY_TIER=Pro` and restart:
+
+**Windows:**
+```bat
+set INVENTORY_TIER=Pro
+InventoryFramework.Server.exe
+```
+
+**Linux:**
+```bash
+INVENTORY_TIER=Pro ./InventoryFramework.Server
+```
 
 ---
 
-## Prerequisites
+## Option B — Docker (recommended for production)
+
+This guide covers self-hosting the InventoryFramework server in production using Docker.
+
+### Prerequisites
 
 - Docker 24+ and Docker Compose v2
 - A domain name or static IP (for TLS)
@@ -20,7 +103,7 @@ This guide covers self-hosting the InventoryFramework server in production using
 
 ## Quick start with Docker
 
-### 1. Clone and configure
+### B.1. Clone and configure
 
 ```bash
 git clone https://github.com/b-altuncay/InventoryFramework
@@ -36,7 +119,7 @@ PERSISTENCE_TYPE=File
 ASPNETCORE_ENVIRONMENT=Production
 ```
 
-### 2. Generate a TLS certificate
+### B.2. Generate a TLS certificate
 
 For development / internal use, generate a self-signed certificate:
 
@@ -48,7 +131,7 @@ This creates `certs/server.pfx` and writes `CERT_PASSWORD` to `.env`.
 
 For production, use a real certificate (see [TLS in production](#tls-in-production)).
 
-### 3. Add your items and recipes
+### B.3. Add your items and recipes
 
 Copy your JSON definition files into the Data directories:
 
@@ -59,7 +142,7 @@ InventoryFramework.Server/Data/
   affixes.json
 ```
 
-### 4. Configure API keys
+### B.4. Configure API keys
 
 Edit `InventoryFramework.Server/appsettings.json` — replace the placeholder keys:
 
@@ -81,7 +164,7 @@ InventoryFramework__Auth__ApiKeys__0__Key=sk-admin-YOUR-SECRET
 InventoryFramework__Auth__ApiKeys__1__Key=sk-game-YOUR-SECRET
 ```
 
-### 5. Apply license (Pro / Enterprise)
+### B.5. Apply license (Pro / Enterprise)
 
 Place your `license.json` in the project root. The `docker-compose.yml` mounts it at `/app/license.json`.
 
@@ -90,7 +173,7 @@ Place your `license.json` in the project root. The `docker-compose.yml` mounts i
 dotnet InventoryFramework.LicenseGenerator.dll validate --license ./license.json
 ```
 
-### 6. Start the server
+### B.6. Start the server
 
 ```bash
 docker compose up -d
@@ -236,6 +319,7 @@ The server runs EF Core migrations automatically on startup.
 
 | Variable | Default | Description |
 |---|---|---|
+| `INVENTORY_TIER` | `Demo` | Active tier when no valid license is found. Values: `Demo`, `Pro`, `Enterprise` |
 | `ASPNETCORE_ENVIRONMENT` | `Production` | `Development` disables API key requirement |
 | `ASPNETCORE_Kestrel__Certificates__Default__Path` | — | Path to PFX cert inside container |
 | `ASPNETCORE_Kestrel__Certificates__Default__Password` | — | PFX certificate password |
