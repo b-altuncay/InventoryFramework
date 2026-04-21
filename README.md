@@ -93,8 +93,9 @@ Same lines work on Godot and Unreal — just swap the facade class name.
 | Max slots per container | 20 | Unlimited | Unlimited |
 | Studio license | Single project | Single studio | Multi-studio |
 | Support | Community | E-mail | Priority + SLA |
+| **Pricing** | Free | [Buy license →](https://inventoryframework-license.workers.dev/activate) | [Contact us →](mailto:mbaltuncay99@gmail.com) |
 
-Licensing: `Demo` (free) · `Pro` · `Enterprise` — [mbaltuncay99@gmail.com](mailto:mbaltuncay99@gmail.com)
+> **Enterprise** pricing is handled privately — [send an email](mailto:mbaltuncay99@gmail.com) with your studio name and use case.
 
 ---
 
