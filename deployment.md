@@ -72,7 +72,7 @@ Edit `appsettings.json` before running:
 
 ### 5. Upgrade to Pro
 
-1. [Activate your license](https://inventoryframework-license.workers.dev/activate) — download `license.json`
+1. [Activate your license](https://inventoryframework-license.mbaltuncay99.workers.dev/activate) — download `license.json`
 2. Place `license.json` next to the server executable
 3. Set `INVENTORY_TIER=Pro` and restart:
 
