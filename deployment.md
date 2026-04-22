@@ -14,7 +14,7 @@ The fastest way to evaluate InventoryFramework. Download the binary, run it — 
 
 ### 1. Download
 
-Go to the [latest GitHub Release](https://github.com/b-altuncay/InventoryFramework/releases/latest) and download the archive for your platform:
+Go to the [latest GitHub Release](https://github.com/b-altuncay/InventoryFramework/releases) and download the archive for your platform:
 
 | File | Platform |
 |---|---|
