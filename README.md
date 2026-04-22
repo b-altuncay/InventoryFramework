@@ -8,22 +8,22 @@
 
 **Server-authoritative inventory and crafting backend for Unity, Godot, and Unreal Engine.**
 
-One server, three engines, zero vendor lock-in. Define your items in JSON, run the server, connect from any engine in under 10 minutes.
+One server, three engines, zero vendor lock-in. Define items in JSON, run the server, connect from any engine in under 10 minutes.
 
-> Full documentation: **[https://b-altuncay.github.io/InventoryFramework](https://b-altuncay.github.io/InventoryFramework)**
+> Documentation: **[https://b-altuncay.github.io/InventoryFramework](https://b-altuncay.github.io/InventoryFramework)**
 
 ---
 
 ## Why InventoryFramework?
 
-Unity's inventory solutions — whether built-in or from the Asset Store — are client-side. That works fine for single-player. The moment you add multiplayer, leaderboards, or a second platform, you hit the same wall every time: the data lives on the client, players can modify it, and syncing it across engines is a custom project of its own.
+Most inventory solutions — whether Unity built-in or from the Asset Store — are client-side. That's fine for single-player. The moment you add multiplayer or a second platform, you hit the same wall: inventory data lives on the client, players can tamper with it, and syncing across engines is its own project.
 
-InventoryFramework takes a different approach:
+InventoryFramework moves all state to the server:
 
-- **All state lives on your server.** Players cannot modify their own inventory outside your game logic. No client-side hacks, no save file editing.
-- **One backend, any engine.** The same server talks to Unity, Godot, and Unreal simultaneously. Switch engines mid-project or ship on multiple platforms without rewriting your inventory logic.
-- **Self-hosted.** Your player data never touches a third-party service. No per-MAU pricing, no outage dependencies, no terms-of-service changes that break your game.
-- **Drop-in ready.** Item definitions are plain JSON files. The server runs as a single binary. You don't need to write a single line of backend code to get started.
+- **Cheat-resistant by default.** Players cannot modify their inventory outside your game logic — no save file editing, no memory patching.
+- **One backend, any engine.** The same server instance talks to Unity, Godot, and Unreal simultaneously. Switch engines mid-project without rewriting inventory logic.
+- **Self-hosted.** Player data never touches a third-party service. No per-MAU fees, no external dependencies, no terms-of-service surprises.
+- **Drop-in.** Items are plain JSON files. The server ships as a single binary. No backend code required to get started.
 
 ---
 
@@ -32,13 +32,13 @@ InventoryFramework takes a different approach:
 ```mermaid
 graph TD
     subgraph Engines["Game Engines"]
-        Unity["🎮 Unity\nUnityAdapter"]
-        Godot["🎮 Godot\nGodotAdapter"]
-        Unreal["🎮 Unreal\nUnrealAdapter"]
-        CSharp["⚙️ Plain C#\n/ Other"]
+        Unity["Unity\nUnityAdapter"]
+        Godot["Godot\nGodotAdapter"]
+        Unreal["Unreal\nUnrealAdapter"]
+        CSharp["Plain C#\n/ Other"]
     end
 
-    SDK["📦 InventoryFramework.SDK\nnetstandard2.1 · gRPC client · retry · mapping"]
+    SDK["InventoryFramework.SDK\nnetstandard2.1 · gRPC client · retry · mapping"]
 
     subgraph Server["InventoryFramework Server  (ASP.NET Core · gRPC)"]
         GrpcLayer["gRPC Endpoints"]
@@ -47,12 +47,12 @@ graph TD
     end
 
     subgraph Storage["Persistence"]
-        File[("📁 Files\n(JSON snapshots)")]
-        SQLite[("🗄️ SQLite")]
-        SQL[("🗄️ SQL Server\n/ PostgreSQL")]
+        File[("Files\nJSON snapshots")]
+        SQLite[("SQLite")]
+        SQL[("SQL Server\n/ PostgreSQL")]
     end
 
-    SignalR["📡 SignalR\nreal-time events"]
+    SignalR["SignalR\nreal-time events"]
 
     Unity & Godot & Unreal & CSharp --> SDK
     SDK -- "gRPC + TLS" --> GrpcLayer
@@ -64,11 +64,11 @@ graph TD
 
 ---
 
-## Get it running in 10 minutes
+## Get started in 10 minutes
 
 ### 1. Download the server
 
-Grab the latest pre-built binary from [GitHub Releases](https://github.com/b-altuncay/InventoryFramework/releases):
+Download the latest binary from [GitHub Releases](https://github.com/b-altuncay/InventoryFramework/releases):
 
 ```
 InventoryFramework-Server-Demo-win-x64.zip    (Windows)
@@ -108,7 +108,7 @@ dotnet add package InventoryFramework.UnrealAdapter  # Unreal
 dotnet add package InventoryFramework.SDK            # Plain C#
 ```
 
-### 4. Connect and add items
+### 4. Connect
 
 ```csharp
 var facade = new UnityInventoryFacade(new UnityInventoryConfiguration
@@ -125,7 +125,7 @@ var snapshot = await facade.RefreshAsync();
 Debug.Log($"Items in backpack: {snapshot.Containers[0].Slots.Count(s => !s.IsEmpty)}");
 ```
 
-Same lines work on Godot and Unreal — just swap the facade class name.
+The API is identical across all three adapters — only the facade class name differs.
 
 ---
 
@@ -139,7 +139,7 @@ Same lines work on Godot and Unreal — just swap the facade class name.
 | SQL Server / PostgreSQL | | | ✓ |
 | Unity · Godot · Unreal adapters | ✓ | ✓ | ✓ |
 | Full inventory management (CRUD, merge, split, sort, drop) | ✓ | ✓ | ✓ |
-| Crafting system (basic) | ✓ | ✓ | ✓ |
+| Crafting system | ✓ | ✓ | ✓ |
 | Craft preview & recipe availability | | ✓ | ✓ |
 | Item affixes (per-instance rolled modifiers) | ✓ | ✓ | ✓ |
 | Player progression / recipe unlock keys | | ✓ | ✓ |
@@ -153,38 +153,38 @@ Same lines work on Godot and Unreal — just swap the facade class name.
 | Max slots per container | 20 | Unlimited | Unlimited |
 | Studio license | — | Single studio | Multi-studio |
 | Support | — | E-mail | Priority + SLA |
-| **Pricing** | Free | [Buy license →](https://inventoryframework-license.mbaltuncay99.workers.dev/activate) | [Contact us →](mailto:mbaltuncay99@gmail.com) |
+| **Pricing** | Free | [Buy license →](https://inventoryframework-license.mbaltuncay99.workers.dev/activate) | [Contact →](mailto:mbaltuncay99@gmail.com) |
 
-> **Enterprise** pricing is handled privately — [send an email](mailto:mbaltuncay99@gmail.com) with your studio name and use case.
+> Enterprise pricing is handled privately — [send an email](mailto:mbaltuncay99@gmail.com) with your studio name and use case.
 
 ---
 
-## License activation flow
+## License activation
 
 ```mermaid
 sequenceDiagram
     autonumber
     actor Customer
     participant Gumroad
-    participant Worker as License Worker<br/>(Cloudflare)
+    participant Worker as License Worker (Cloudflare)
     participant Server as Your Server
 
     Customer->>Gumroad: Purchase Pro license
-    Gumroad-->>Customer: License key (e-mail receipt)
-    Customer->>Worker: /activate  (key + studio name)
+    Gumroad-->>Customer: License key via e-mail
+    Customer->>Worker: POST /activate  (key + studio name)
     Worker->>Gumroad: Verify license key
-    Gumroad-->>Worker: ✓ Valid  (tier: Pro v1)
+    Gumroad-->>Worker: Valid  (tier: Pro v1)
     Worker-->>Customer: license.json  (RSA-signed)
     Customer->>Server: Place license.json next to binary
     Server->>Server: Validate signature on startup
-    Server-->>Customer: ✓ License validated — full features unlocked
+    Server-->>Customer: License accepted — Pro features unlocked
 ```
 
 ---
 
 ## Item affixes
 
-Affixes are per-instance modifiers rolled onto individual item stacks — fire damage, move speed, crit chance. Defined in JSON, they travel from the server through the SDK to the engine adapter without any extra mapping code.
+Affixes are per-instance modifiers rolled onto individual item stacks — fire damage, move speed, crit chance. They are defined in JSON and flow from server to SDK to engine adapter with no extra mapping code.
 
 ```json
 [
@@ -201,17 +201,17 @@ await facade.GrantItemsAsync(containerId, "sword", 1, affixes: new[]
 
 ---
 
-## Crafting system
+## Crafting
 
 ```mermaid
 flowchart LR
-    JSON["📄 recipes.json\ndefine recipes"] --> Registry["Recipe Registry\n(loaded at startup)"]
+    JSON["recipes.json"] --> Registry["Recipe Registry\n(loaded at startup)"]
 
     subgraph CraftFlow["Craft request"]
         direction TB
-        Check["Check ingredients\n+ unlock keys"] --> Consume["Consume inputs\nfrom inventory"]
-        Consume --> Produce["Place outputs\ninto inventory"]
-        Produce --> Events["Emit CraftCompleted\nevent via SignalR"]
+        Check["Check ingredients\n+ unlock keys"] --> Consume["Consume inputs"]
+        Consume --> Produce["Place outputs"]
+        Produce --> Events["Emit CraftCompleted\nvia SignalR"]
     end
 
     Registry --> CraftFlow
@@ -222,7 +222,7 @@ flowchart LR
     end
 ```
 
-Recipes support multiple outputs, partial crafting, and per-player recipe unlock keys. Craft preview lets players see what they can build before committing.
+Recipes support multiple outputs, partial crafting, and per-player unlock keys. `PreviewCraft` lets players check what they can build without consuming ingredients.
 
 ---
 
@@ -230,44 +230,42 @@ Recipes support multiple outputs, partial crafting, and per-player recipe unlock
 
 ### Slot locking
 
-Lock a slot to protect its contents from automated bulk operations (quick-store, auto-sort). Manual moves and crafting still work.
+Locks a slot so it is skipped by QuickStore and auto-sort. Manual moves and crafting still work on locked slots.
 
 ```csharp
 await facade.LockSlotAsync(containerId, slotIndex: 2, lockSlot: true);
-// Slot 2 is now skipped by QuickStore and SortContainer
 ```
 
 ### Stack splitting
 
-Split a stack into two within the same container.
+Splits a stack into two within the same container.
 
 ```csharp
 var result = await facade.SplitStackAsync(containerId, sourceSlotIndex: 0, amount: 5);
-// Slot 0 keeps the remainder; result.DestinationSlotIndex tells you where the split landed
+// result.DestinationSlotIndex — where the split portion landed
 ```
 
 ### Dropping items
 
-Remove items from a slot and discard them. The server returns the item definition id and quantity so the game can spawn a world drop.
+Removes items from a slot and returns the definition id and quantity, so the game can spawn a world pickup.
 
 ```csharp
 var result = await facade.DropItemsAsync(containerId, slotIndex: 0, amount: 3);
-// result.DroppedItemDefinitionId — spawn a wood pickup at the player's position
+// result.DroppedItemDefinitionId — use this to spawn the world object
 ```
 
 ### Auto-sort
 
-Sort all unlocked slots in a container. Locked slots act as fixed anchors the sort routes around.
+Sorts all unlocked slots in a container. Locked slots stay in place and the sort routes around them.
 
 ```csharp
-await facade.SortContainerAsync(containerId, sortMode: 0);  // 0 = ByNameAscending
-                                                             // 1 = ByWeightDescending
-                                                             // 2 = ByTagThenName
+await facade.SortContainerAsync(containerId, sortMode: 0);
+// 0 = ByNameAscending  1 = ByWeightDescending  2 = ByTagThenName
 ```
 
-### Container slot restrictions
+### Slot restrictions
 
-Equipment slots can be restricted to items with a specific tag. Mismatched items are skipped automatically during transfers and sorting.
+Equipment slots can be restricted to a specific item tag. Mismatched items are rejected during transfers and sorting.
 
 ```json
 { "id": "helmet", "displayName": "Iron Helmet", "maxStackSize": 1, "weight": 3.0, "tags": ["helmet"] }
@@ -288,7 +286,7 @@ Equipment slots can be restricted to items with a specific tag. Mismatched items
 | `PreviewCraftItems` | Checks craftability without modifying state |
 | `BrowseRecipes` | Lists recipes by category / station |
 | `GetAvailableRecipes` | Returns craftable recipes given current inventory |
-| `UnlockRecipeKey` / `RevokeRecipeKey` | Manage player progression keys |
+| `UnlockRecipeKey` / `RevokeRecipeKey` | Manage per-player progression keys |
 | `GetPlayerProgression` | Returns all unlocked keys for an actor |
 | `TradeItems` | Cross-inventory item transfer (admin) |
 | `LockSlot` | Locks or unlocks a specific slot |
@@ -320,6 +318,6 @@ All requests require an `x-api-key` header. Admin endpoints additionally require
 
 ## License
 
-Commercial license — one-time purchase per major version. Single studio license covers all projects within your studio.
+Commercial — one-time purchase per major version. A single studio license covers all projects within your studio.
 
 [**Buy Pro →**](https://inventoryframework-license.mbaltuncay99.workers.dev/activate) · [Enterprise inquiry →](mailto:mbaltuncay99@gmail.com)
