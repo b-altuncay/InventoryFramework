@@ -66,26 +66,9 @@ graph TD
 
 ## Get started in 10 minutes
 
-### 1. Download the server
+### 1. Run the server
 
-Download the latest binary from [GitHub Releases](https://github.com/b-altuncay/InventoryFramework/releases):
-
-```
-InventoryFramework-Server-Demo-win-x64.zip    (Windows)
-InventoryFramework-Server-Demo-linux-x64.zip  (Linux)
-```
-
-Extract and run:
-
-```bash
-# Windows
-start-demo.bat
-
-# Linux
-chmod +x start-demo.sh && ./start-demo.sh
-```
-
-The server starts at `https://localhost:7289`.
+See [deployment docs](https://b-altuncay.github.io/InventoryFramework/deployment.html) for download and Docker options. The server starts at `https://localhost:7289`.
 
 ### 2. Define your items
 
@@ -153,7 +136,7 @@ The API is identical across all three adapters — only the facade class name di
 | Max slots per container | 20 | Unlimited | Unlimited |
 | Studio license | — | Single studio | Multi-studio |
 | Support | — | E-mail | Priority + SLA |
-| **Pricing** | Free | [Buy license →](https://inventoryframework-license.mbaltuncay99.workers.dev/activate) | [Contact →](mailto:mbaltuncay99@gmail.com) |
+| **Pricing** | Free | [Buy license →](https://mbaltuncay.gumroad.com/l/qyeyym) | [Contact →](mailto:mbaltuncay99@gmail.com) |
 
 > Enterprise pricing is handled privately — [send an email](mailto:mbaltuncay99@gmail.com) with your studio name and use case.
 
@@ -320,4 +303,4 @@ All requests require an `x-api-key` header. Admin endpoints additionally require
 
 Commercial — one-time purchase per major version. A single studio license covers all projects within your studio.
 
-[**Buy Pro →**](https://inventoryframework-license.mbaltuncay99.workers.dev/activate) · [Enterprise inquiry →](mailto:mbaltuncay99@gmail.com)
+[**Buy Pro →**](https://mbaltuncay.gumroad.com/l/qyeyym) · [Enterprise inquiry →](mailto:mbaltuncay99@gmail.com)
