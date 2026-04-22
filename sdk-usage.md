@@ -30,7 +30,7 @@ using InventoryFramework.SDK.Models;
 
 var options = new InventoryClientOptions
 {
-    ServerAddress = "https://your-server:5001",
+    ServerAddress = "https://your-server:7289",
     ApiKey        = "sk-game-your-secret-key"
 };
 
@@ -41,7 +41,7 @@ IInventoryClient client = new GrpcInventoryClient(options);
 
 | Property | Type | Default | Description |
 |---|---|---|---|
-| `ServerAddress` | string | required | Full URL of the gRPC server (e.g. `https://localhost:5001`). |
+| `ServerAddress` | string | required | Full URL of the gRPC server (e.g. `https://localhost:7289`). |
 | `ApiKey` | string | `""` | API key sent in the `x-api-key` gRPC metadata header. Leave empty if `RequireApiKey` is `false` on the server. |
 | `TimeoutSeconds` | int | `30` | Per-call deadline in seconds. |
 
