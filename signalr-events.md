@@ -12,10 +12,10 @@ InventoryFramework broadcasts domain events to connected clients via SignalR. Th
 
 ## Hub endpoint
 
-The hub is mounted at `/inventory-hub` on the same host as the gRPC server.
+The hub is mounted at `/hubs/inventory` on the same host as the gRPC server.
 
 ```
-wss://your-server/inventory-hub
+wss://your-server/hubs/inventory
 ```
 
 ---
@@ -27,7 +27,7 @@ After connecting, a client joins the group for a specific inventory aggregate:
 ```javascript
 // JavaScript / TypeScript example
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("/inventory-hub")
+    .withUrl("/hubs/inventory")
     .build();
 
 await connection.start();
@@ -130,7 +130,7 @@ Fired once after a craft operation completes and all outputs have been placed in
 using Microsoft.AspNetCore.SignalR.Client;
 
 var connection = new HubConnectionBuilder()
-    .WithUrl("https://your-server/inventory-hub")
+    .WithUrl("https://your-server/hubs/inventory")
     .WithAutomaticReconnect()
     .Build();
 
@@ -168,7 +168,7 @@ public partial class InventorySignalR : Node
     public override async void _Ready()
     {
         _connection = new HubConnectionBuilder()
-            .WithUrl("https://your-server/inventory-hub")
+            .WithUrl("https://your-server/hubs/inventory")
             .WithAutomaticReconnect()
             .Build();
 
