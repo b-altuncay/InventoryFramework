@@ -12,30 +12,23 @@ This guide covers adding InventoryFramework to a Godot 4 project using C#.
 
 ## Requirements
 
-- Godot 4.x with .NET (Mono) enabled
-- .NET 6 or .NET 7 (Godot 4.x uses .NET 6 by default)
+- Godot 4.x with .NET enabled (the "Mono" / C# build — not GDScript-only)
+- .NET runtime: Godot 4.0–4.2 ships with .NET 6; Godot 4.3+ ships with .NET 8. Either works with InventoryFramework.GodotAdapter.
 - A running InventoryFramework server (see [server-configuration.md](server-configuration.md))
 
 ---
 
 ## Installation
 
-### Add the NuGet Package
+### Add the NuGet packages
 
-In your Godot project's `.csproj`, add:
+From the terminal inside your Godot project directory (where the `.csproj` lives):
 
-```xml
-<ItemGroup>
-  <Reference Include="InventoryFramework.SDK">
-    <HintPath>addons/InventoryFramework/InventoryFramework.SDK.dll</HintPath>
-  </Reference>
-  <Reference Include="InventoryFramework.GodotAdapter">
-    <HintPath>addons/InventoryFramework/InventoryFramework.GodotAdapter.dll</HintPath>
-  </Reference>
-</ItemGroup>
+```bash
+dotnet add package InventoryFramework.GodotAdapter
 ```
 
-Copy the DLLs from the `dist/godot/` folder to `res://addons/InventoryFramework/`.
+This pulls in `InventoryFramework.SDK` as a transitive dependency. You do not need to copy any DLLs manually.
 
 ---
 

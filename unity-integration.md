@@ -20,19 +20,23 @@ This guide covers adding InventoryFramework to a Unity project using the `Invent
 
 ## Installation
 
-### Option A — Unity Package (recommended)
+### Option A — NuGetForUnity (recommended)
 
-Copy the contents of the `unity-package/` directory into your Unity project's `Assets/InventoryFramework/` folder. The package includes:
+Install [NuGetForUnity](https://github.com/GlitchEnzo/NuGetForUnity) from the Unity Package Manager, then search for and install:
+
+- `InventoryFramework.UnityAdapter`
+
+This pulls in `InventoryFramework.SDK` and all gRPC dependencies automatically.
+
+### Option B — Manual DLL install
+
+Download `InventoryFramework.UnityAdapter` from [NuGet.org](https://www.nuget.org/packages/InventoryFramework.UnityAdapter). A `.nupkg` file is a zip archive — rename it to `.zip`, open it, and copy the contents of `lib/netstandard2.1/` to `Assets/Plugins/InventoryFramework/` in your Unity project.
+
+Required DLLs:
 - `InventoryFramework.SDK.dll`
 - `InventoryFramework.UnityAdapter.dll`
-- All required gRPC dependencies
-
-### Option B — DLL References
-
-Build the solution in Release mode. Copy the following DLLs to `Assets/Plugins/`:
-- `InventoryFramework.SDK.dll`
-- `InventoryFramework.UnityAdapter.dll`
-- `Grpc.Net.Client.dll`, `Grpc.Core.Api.dll`, `Google.Protobuf.dll`
+- `Grpc.Net.Client.dll`, `Grpc.Core.Api.dll`, `Grpc.Net.Common.dll`, `Google.Protobuf.dll`
+- `Polly.dll`, `System.Memory.dll`
 
 ---
 
