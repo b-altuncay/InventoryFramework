@@ -6,21 +6,19 @@ nav_order: 4
 
 # Unreal Engine Integration Guide
 
-InventoryFramework communicates with Unreal Engine through a standalone .NET service process that runs alongside your Unreal project. The `UnrealAdapter` handles the gRPC communication; Unreal calls into it via your preferred inter-process mechanism (HTTP, named pipes, shared memory, or a managed C++/CLR bridge depending on your pipeline).
+This guide covers adding InventoryFramework to an Unreal Engine project using C# (via the .NET runtime bridge or a standalone service process).
 
 ---
 
 ## Requirements
 
 - Unreal Engine 5.x
-- A running InventoryFramework server (see [Deployment](deployment.html))
-- .NET 8 Runtime on the host machine
+- A running InventoryFramework server (see [server-configuration.md](server-configuration.md))
+- .NET 8 runtime accessible from the Unreal project (service process or plugin bridge)
 
 ---
 
 ## Installation
-
-Add the adapter to your companion .NET project:
 
 ```bash
 dotnet add package InventoryFramework.UnrealAdapter
@@ -36,7 +34,7 @@ using InventoryFramework.UnrealAdapter.Services;
 
 var config = new UnrealInventoryConfiguration
 {
-    ServerAddress = "https://your-server:7289",
+    ServerAddress = "https://your-server:5001",
     ApiKey        = "sk-game-your-key",
     ActorId       = "player-001",
     DefaultSourceContainerCapacity = 30,

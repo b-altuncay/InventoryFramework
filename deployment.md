@@ -14,7 +14,7 @@ The fastest way to evaluate InventoryFramework. Download the binary, run it — 
 
 ### 1. Download
 
-Go to the [latest GitHub Release](https://github.com/b-altuncay/InventoryFramework/releases) and download the archive for your platform:
+Go to the [latest GitHub Release](https://github.com/b-altuncay/InventoryFramework/releases/latest) and download the archive for your platform:
 
 | File | Platform |
 |---|---|
@@ -72,9 +72,9 @@ Edit `appsettings.json` before running:
 
 ### 5. Upgrade to Pro
 
-1. [Purchase a Pro license](https://mbaltuncay.gumroad.com/l/qyeyym) on Gumroad — you will receive a license key by e-mail.
-2. [Activate the license](https://inventoryframework-license.mbaltuncay99.workers.dev/activate) with your key and studio name to download `license.json`.
-3. Place `license.json` next to the server executable and restart:
+1. [Activate your license](https://inventoryframework-license.mbaltuncay99.workers.dev/activate) — download `license.json`
+2. Place `license.json` next to the server executable
+3. Set `INVENTORY_TIER=Pro` and restart:
 
 **Windows:**
 ```bat
@@ -91,7 +91,7 @@ INVENTORY_TIER=Pro ./InventoryFramework.Server
 
 ## Option B — Docker (recommended for production)
 
-This guide covers self-hosting the InventoryFramework server in production using Docker. The release archive includes a `docker-compose.yml` and supporting scripts.
+This guide covers self-hosting the InventoryFramework server in production using Docker.
 
 ### Prerequisites
 
@@ -103,11 +103,11 @@ This guide covers self-hosting the InventoryFramework server in production using
 
 ## Quick start with Docker
 
-### B.1. Extract the release archive
-
-Download and extract the release archive for your tier. It includes `docker-compose.yml`, `.env.example`, and helper scripts.
+### B.1. Clone and configure
 
 ```bash
+git clone https://github.com/b-altuncay/InventoryFramework
+cd InventoryFramework
 cp .env.example .env
 ```
 
@@ -136,7 +136,7 @@ For production, use a real certificate (see [TLS in production](#tls-in-producti
 Copy your JSON definition files into the Data directories:
 
 ```
-Data/
+InventoryFramework.Server/Data/
   Items/     ← items.json (and any additional files)
   Recipes/   ← recipes.json
   affixes.json
@@ -144,7 +144,7 @@ Data/
 
 ### B.4. Configure API keys
 
-Edit `appsettings.json` — replace the placeholder keys:
+Edit `InventoryFramework.Server/appsettings.json` — replace the placeholder keys:
 
 ```json
 "Auth": {
@@ -159,6 +159,7 @@ Edit `appsettings.json` — replace the placeholder keys:
 Never commit real API keys to source control. Use environment variables instead:
 
 ```env
+# docker-compose environment section (or .env):
 InventoryFramework__Auth__ApiKeys__0__Key=sk-admin-YOUR-SECRET
 InventoryFramework__Auth__ApiKeys__1__Key=sk-game-YOUR-SECRET
 ```
@@ -166,6 +167,11 @@ InventoryFramework__Auth__ApiKeys__1__Key=sk-game-YOUR-SECRET
 ### B.5. Apply license (Pro / Enterprise)
 
 Place your `license.json` in the project root. The `docker-compose.yml` mounts it at `/app/license.json`.
+
+```bash
+# Verify the license before starting
+dotnet InventoryFramework.LicenseGenerator.dll validate --license ./license.json
+```
 
 ### B.6. Start the server
 
@@ -189,7 +195,7 @@ curl http://localhost:5210/health
 ```yaml
 # caddy/Caddyfile
 inventory.yourdomain.com {
-    reverse_proxy h2c://inventory-server:7289
+    reverse_proxy h2c://inventory-server:5210
 }
 ```
 

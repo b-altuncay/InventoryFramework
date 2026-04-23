@@ -26,7 +26,7 @@ InventoryFramework takes a different approach:
 - **All state lives on your server.** Players cannot modify their own inventory outside your game logic. No client-side hacks, no save file editing.
 - **One backend, any engine.** The same server talks to Unity, Godot, and Unreal simultaneously. Switch engines mid-project or ship on multiple platforms without rewriting your inventory logic.
 - **Self-hosted.** Your player data never touches a third-party service. No per-MAU pricing, no outage dependencies, no terms-of-service changes that break your game.
-- **Drop-in ready.** Item definitions are plain JSON files. The server ships as a single binary. No backend code required to get started.
+- **Drop-in ready.** Item definitions are plain JSON files. The server runs with `dotnet run`. You don't need to write a single line of backend code to get started.
 
 ---
 
@@ -34,7 +34,13 @@ InventoryFramework takes a different approach:
 
 ### 1. Start the server
 
-Download the pre-built binary from [GitHub Releases](https://github.com/b-altuncay/InventoryFramework/releases) and run it. See [Deployment](deployment.html) for full setup and Docker options. The server starts at `https://localhost:7289`.
+```bash
+git clone https://github.com/b-altuncay/InventoryFramework
+cd InventoryFramework/InventoryFramework.Server
+dotnet run
+```
+
+The server starts at `https://localhost:7289`.
 
 ### 2. Define your items
 
@@ -51,10 +57,17 @@ Create `Data/Items/items.json`:
 ### 3. Install the adapter for your engine
 
 ```bash
-dotnet add package InventoryFramework.UnityAdapter   # Unity
-dotnet add package InventoryFramework.GodotAdapter   # Godot
-dotnet add package InventoryFramework.UnrealAdapter  # Unreal
-dotnet add package InventoryFramework.SDK            # Plain C# / server-to-server
+# Unity
+dotnet add package InventoryFramework.UnityAdapter
+
+# Godot
+dotnet add package InventoryFramework.GodotAdapter
+
+# Unreal
+dotnet add package InventoryFramework.UnrealAdapter
+
+# Plain C# / server-to-server
+dotnet add package InventoryFramework.SDK
 ```
 
 ### 4. Connect and add items
@@ -82,27 +95,18 @@ Same four lines work on Godot and Unreal — just swap the facade class name.
 
 | | Demo | Pro | Enterprise |
 |---|:---:|:---:|:---:|
-| Pre-built server binary (Windows & Linux) | ✓ | ✓ | ✓ |
+| Binary (server + SDK + adapters) | ✓ | ✓ | ✓ |
 | File-based persistence | ✓ | ✓ | ✓ |
 | SQLite persistence | | ✓ | ✓ |
 | SQL Server / PostgreSQL | | | ✓ |
 | Unity · Godot · Unreal adapters | ✓ | ✓ | ✓ |
-| Full inventory management (CRUD, merge, split, sort, drop) | ✓ | ✓ | ✓ |
-| Crafting system | ✓ | ✓ | ✓ |
-| Craft preview & recipe availability | | ✓ | ✓ |
-| Item affixes (per-instance rolled modifiers) | ✓ | ✓ | ✓ |
+| Item affixes (rolled modifiers) | ✓ | ✓ | ✓ |
 | Player progression / recipe unlock keys | | ✓ | ✓ |
-| Trading system | | ✓ | ✓ |
-| QuickStore | | ✓ | ✓ |
 | Real-time events via SignalR | ✓ | ✓ | ✓ |
-| Docker + docker-compose | ✓ | ✓ | ✓ |
-| Rate limiting & API key auth | ✓ | ✓ | ✓ |
-| Max actors | 3 | Unlimited | Unlimited |
-| Max items per actor | 50 | Unlimited | Unlimited |
 | Max slots per container | 20 | Unlimited | Unlimited |
-| Studio license | — | Single studio | Multi-studio |
-| Support | — | E-mail | Priority + SLA |
-| **Pricing** | Free | [Buy license →](https://mbaltuncay.gumroad.com/l/qyeyym) | [Contact us →](mailto:mbaltuncay99@gmail.com) |
+| Studio license | Single project | Single studio | Multi-studio |
+| Support | Community | E-mail | Priority + SLA |
+| **Pricing** | Free | [Buy license →](https://inventoryframework-license.mbaltuncay99.workers.dev/activate) | [Contact us →](mailto:mbaltuncay99@gmail.com) |
 
 > **Enterprise** pricing is handled privately — [send an email](mailto:mbaltuncay99@gmail.com) with your studio name and use case.
 

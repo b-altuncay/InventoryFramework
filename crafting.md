@@ -62,7 +62,7 @@ Recipe files are JSON arrays. By default the server loads every `*.json` file un
 | `craftingCategory` | string | `""` | Groups recipes in the browser (e.g. `"smithing"`). |
 | `requiredStation` | string | `""` | Station the player must be at to craft (e.g. `"forge"`). |
 | `isHiddenUntilUnlocked` | bool | `false` | Hides the recipe from the browser until the player has all `requiredUnlockKeys`. |
-| `requiredUnlockKeys` | array | `[]` | Unlock keys the actor must own to use this recipe. Requires **Pro** tier. See [Player Progression](progression.md). |
+| `requiredUnlockKeys` | array | `[]` | Unlock keys the actor must own to see and use this recipe. See [Player Progression](progression.md). |
 
 ---
 
@@ -157,10 +157,10 @@ If a recipe has a non-empty `requiredStation`, the server calls `IRecipeStationP
 
 Crafting operations are individually gated by feature flags (see [Server Configuration](server-configuration.md)):
 
-| Operation | Feature key | Tier |
-|---|---|---|
-| BrowseRecipes | `RecipeBrowser` | Demo+ |
-| GetRecipeDetails | `RecipeDetails` | Demo+ |
-| CraftItems | `Crafting` | Demo+ |
-| GetAvailableRecipes | `RecipeAvailability` | Pro+ |
-| PreviewCraftItems | `CraftPreview` | Pro+ |
+| Operation | Feature key |
+|---|---|
+| BrowseRecipes | `RecipeBrowser` |
+| GetRecipeDetails | `RecipeDetails` |
+| GetAvailableRecipes | `RecipeAvailability` (Pro+) |
+| PreviewCraftItems | `CraftPreview` (Pro+) |
+| CraftItems | `Crafting` |
