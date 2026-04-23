@@ -93,7 +93,7 @@ Fired when items are moved from one slot to another within the same container.
 
 ### `TransferCompleted`
 
-Fired when items are transferred between two containers (inventory transfer or crafting output).
+Fired when items are transferred between two containers.
 
 ```json
 {
@@ -104,6 +104,21 @@ Fired when items are transferred between two containers (inventory transfer or c
   "itemDefinitionId": "plank",
   "quantityTransferred": 2,
   "occurredAtUtc": "2026-04-15T10:00:03Z"
+}
+```
+
+### `CraftCompleted`
+
+Fired once after a craft operation completes and all outputs have been placed in the target container. Emitted in addition to the per-slot `ItemRemoved` and `ItemAdded` events, so clients can react to the craft as a single high-level action.
+
+```json
+{
+  "inventoryAggregateId": "inv-player-123",
+  "recipeId": "plank_recipe",
+  "actualCraftCount": 2,
+  "sourceContainerId": "container-backpack-guid",
+  "targetContainerId": "container-backpack-guid",
+  "occurredAtUtc": "2026-04-15T10:00:04Z"
 }
 ```
 
@@ -132,18 +147,51 @@ await connection.InvokeAsync("SubscribeToInventory", inventoryId);
 
 ## Godot example
 
-```gdscript
-extends Node
+Godot 4 C# projects can use the official `Microsoft.AspNetCore.SignalR.Client` NuGet package directly — no third-party library needed.
 
-var connection: SignalRClient  # use a GDScript SignalR library
+Add to your `.csproj`:
 
-func _ready():
-    connection.connect_to_server("wss://your-server/inventory-hub")
-    connection.subscribe("ItemAdded", _on_item_added)
-    connection.invoke("SubscribeToInventory", inventory_id)
+```xml
+<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.*" />
+```
 
-func _on_item_added(data: Dictionary):
-    print("Added %d x %s" % [data["quantityAdded"], data["itemDefinitionId"]])
+Then connect the same way as the Unity example:
+
+```csharp
+using Microsoft.AspNetCore.SignalR.Client;
+using Godot;
+
+public partial class InventorySignalR : Node
+{
+    private HubConnection _connection;
+
+    public override async void _Ready()
+    {
+        _connection = new HubConnectionBuilder()
+            .WithUrl("https://your-server/inventory-hub")
+            .WithAutomaticReconnect()
+            .Build();
+
+        _connection.On<ItemAddedNotification>("ItemAdded", n =>
+        {
+            GD.Print($"Added {n.QuantityAdded}x {n.ItemDefinitionId} to slot {n.SlotIndex}");
+        });
+
+        _connection.On<CraftCompletedNotification>("CraftCompleted", n =>
+        {
+            GD.Print($"Crafted {n.ActualCraftCount}x {n.RecipeId}");
+        });
+
+        await _connection.StartAsync();
+        await _connection.InvokeAsync("SubscribeToInventory", inventoryId);
+    }
+
+    public override async void _ExitTree()
+    {
+        if (_connection != null)
+            await _connection.DisposeAsync();
+    }
+}
 ```
 
 ---
