@@ -25,10 +25,10 @@ Most inventory systems for game engines keep state on the client. That works for
 
 InventoryFramework runs all inventory and crafting logic on a server you control:
 
-- Item state is stored server-side. Players cannot modify their inventory outside of your game logic, no memory editing or save file tampering.
-- One server handles Unity, Godot, and Unreal at the same time. You can add an engine or switch platforms without touching the backend.
-- You self-host it on your own infrastructure. No per-MAU pricing, no third-party service dependencies.
-- Item definitions are JSON files. The server starts with `dotnet run` and needs no backend code to get going.
+- Item state is stored server-side, so players can't tamper with it. No memory editing, no save file manipulation.
+- The same server talks to Unity, Godot, and Unreal. Add an engine later or switch mid-project without touching the backend.
+- You self-host it. Player data stays on your own servers, no per-MAU costs or third-party dependencies.
+- Getting started takes about 10 minutes. Item definitions are JSON files, the server starts with `dotnet run`.
 
 <br>
 

@@ -16,10 +16,7 @@ InventoryFramework uses a lightweight unlock-key system to gate recipe access pe
 
 A *recipe unlock key* is an arbitrary string (e.g. `"blacksmith_tier2"`, `"alchemy_unlocked"`). Recipes that require a key are hidden and uncraftable until the actor's progression record contains that key.
 
-Keys are:
-- **Granted** by a server-side admin call (e.g. after completing a quest).
-- **Revoked** individually.
-- **Persisted** per actor in the configured progression storage.
+Keys are granted by a server-side admin call (e.g. after completing a quest), revoked individually, and persisted per actor in the configured progression storage.
 
 ---
 

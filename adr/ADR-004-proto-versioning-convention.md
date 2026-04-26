@@ -29,7 +29,7 @@ change all endpoint paths from `/inventory.InventoryService/GrantItems` to
 `/inventory.v1.InventoryService/GrantItems`. Every client connecting to the old URL would
 immediately receive `UNIMPLEMENTED`. This is a hard breaking change with no graceful migration.
 
-Additionally, the current protos use `option csharp_namespace = "InventoryFramework.Server.Grpc";`
+The current protos already use `option csharp_namespace = "InventoryFramework.Server.Grpc";`
 (server) and `option csharp_namespace = "InventoryFramework.SDK.Grpc";` (SDK), which already
 decouple the generated C# namespaces from the proto package name. Renaming the package
 provides no C# benefit.
