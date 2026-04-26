@@ -5,6 +5,8 @@ remote_theme: just-the-docs/just-the-docs@v0.10.0
 url: "https://b-altuncay.github.io"
 baseurl: "/InventoryFramework"   # change this to match your public repo name
 
+google_site_verification: E7qDdHbTVdOiUGE_PGwOM1JKt0RGuZMSiCoU-HtKUvM
+
 color_scheme: dark
 search_enabled: true
 heading_anchors: true
