@@ -47,10 +47,10 @@ When `hasDurability` is `true`:
 - New stacks are initialized at `maxDurability`.
 - The `CurrentDurability` field appears on every slot in the inventory snapshot returned by `GetInventory`.
 - Durability is reduced by calling a damage application service on the server (or directly through your game's server-side logic).
-- Stacks with different durability values **cannot be merged** — they are treated as distinct items.
+- Stacks with different durability values **cannot be merged**; they are treated as distinct items.
 - `WithDurability(newValue)` produces a new immutable stack with the updated value.
 
-### Example — durability in inventory snapshot
+### Example: durability in inventory snapshot
 
 ```json
 {
@@ -75,12 +75,12 @@ When `hasDurability` is `true`:
 
 ## Tags
 
-Tags are free-form strings. The server does not filter or interpret them — they are stored on the definition and surfaced in snapshots for client-side use.
+Tags are free-form strings. The server does not filter or interpret them; tags are stored on the definition and surfaced in snapshots for client-side use.
 
 Common patterns:
-- `"weapon"`, `"armor"`, `"consumable"` — item category
-- `"quest"` — flag for quest items that shouldn't be dropped
-- `"craftable"` — items that can appear as recipe outputs
+- `"weapon"`, `"armor"`, `"consumable"`: item category
+- `"quest"`: flag for quest items that shouldn't be dropped
+- `"craftable"`: items that can appear as recipe outputs
 
 ---
 

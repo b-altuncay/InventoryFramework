@@ -89,7 +89,7 @@ Controls the inventory storage backend.
 | `SqlServer` | Requires adding `Microsoft.EntityFrameworkCore.SqlServer` to the Server project. |
 | `PostgreSql` | Requires adding `Npgsql.EntityFrameworkCore.PostgreSQL` to the Server project. |
 
-For `SqlServer` and `PostgreSql`, the server throws a descriptive `InvalidOperationException` at startup listing the exact NuGet package to add — the framework is provider-agnostic, no provider is bundled for these.
+For `SqlServer` and `PostgreSql`, the server throws a descriptive `InvalidOperationException` at startup listing the exact NuGet package to add. The framework is provider-agnostic; no provider is bundled for these.
 
 ### `Persistence.ConnectionString`
 

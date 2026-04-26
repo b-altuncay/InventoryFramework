@@ -1,6 +1,6 @@
 # ADR-003: Outbox Pattern for At-Least-Once Event Delivery
 
-**Status:** Accepted  
+**Status:** Accepted
 **Date:** 2026-04-16
 
 ## Context
@@ -30,25 +30,20 @@ Override `SaveChangesAsync`, detect pending domain events, and dispatch them ins
 commit callback.
 
 **Rejected:** SignalR `DispatchAsync` is I/O-bound and cannot safely participate in a DB
-transaction. If dispatch throws, the transaction has already committed — we lose both
-transactional atomicity and clarity about what happened.
+transaction. If dispatch throws, the transaction has already committed, so we lose both transactional atomicity and clarity about what happened.
 
 ### Option C: Outbox Pattern with Background Poller (selected)
 Write domain events to an `OutboxMessages` table in the **same DB transaction** as the
 aggregate snapshot. A separate `BackgroundService` polls for unprocessed outbox records,
 dispatches them via `IDomainEventDispatcher`, and marks them as dispatched.
 
-**Pros:**
-- Aggregate snapshot + outbox record are committed atomically. No phantom events, no lost
-  notifications after crash.
+Pros:
+- Aggregate snapshot and outbox record are committed atomically. No phantom events, no lost notifications after a crash.
 - Background poller is simple: read pending rows, dispatch, mark done.
-- At-least-once delivery: if dispatch succeeds but the "mark done" write fails, the event
-  is dispatched again on the next poll cycle. SignalR push is idempotent from the client's
-  perspective (duplicate notifications are harmless — the client re-fetches state anyway).
+- At-least-once delivery: if dispatch succeeds but the "mark done" write fails, the event is dispatched again on the next poll cycle. SignalR push is idempotent from the client's perspective; duplicate notifications are harmless since the client re-fetches state anyway.
 
-**Cons:**
-- Notification delay equals polling interval (default: 5 seconds). For real-time trading
-  this is acceptable; for sub-second reaction games a different transport would be needed.
+Cons:
+- Notification delay equals the polling interval (default: 5 seconds). For real-time trading this is acceptable; for sub-second reaction games a different transport would be needed.
 - Requires an additional DB table (`OutboxMessages`) and a background service.
 
 ## Decision
@@ -56,16 +51,14 @@ dispatches them via `IDomainEventDispatcher`, and marks them as dispatched.
 Implement the **Outbox Pattern with a Background Poller** for the SQL persistence path.
 
 Design specifics:
-- `OutboxMessages` table is part of the same `InventoryDbContext` — same DB, same schema,
-  same migration.
+- `OutboxMessages` table is part of the same `InventoryDbContext` (same DB, same schema, same migration).
 - `SqlInventoryAggregateRepository.SaveAsync` writes outbox records inside the existing
   transaction before `CommitAsync`.
 - `OutboxDispatcherBackgroundService` polls every 5 seconds, processes up to 50 pending
   messages per cycle (prevents thundering herd after downtime).
 - Poison messages (unknown event type after deserialization) are marked dispatched and logged
   as errors rather than blocking the queue.
-- The file-based persistence path (`FileInventoryAggregateRepository`) is unaffected — it
-  continues dispatching synchronously after save (best-effort, at-most-once).
+- The file-based persistence path (`FileInventoryAggregateRepository`) is unaffected; it continues dispatching synchronously after save (best-effort, at-most-once).
 
 ## Consequences
 

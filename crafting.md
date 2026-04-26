@@ -6,7 +6,7 @@ nav_order: 1
 
 # Crafting & Recipes
 
-InventoryFramework provides a server-authoritative crafting system. All recipe validation runs on the server — clients cannot spoof ingredients or outputs.
+InventoryFramework provides a server-authoritative crafting system. All recipe validation runs on the server; clients cannot spoof ingredients or outputs.
 
 ---
 
@@ -105,9 +105,9 @@ var result = await client.GetAvailableRecipesAsync(
 ```
 
 Each `AvailableRecipeItemResult` reports:
-- `CanCraftRequestedCount` — whether the actor has enough ingredients for `requestedCraftCount` runs.
-- `MaximumCraftableCount` — maximum number of times this recipe could be crafted with current stock.
-- `Ingredients` — per-ingredient `RequiredQuantity`, `AvailableQuantity`, `MissingQuantity`, `IsSatisfied`.
+- `CanCraftRequestedCount`: whether the actor has enough ingredients for `requestedCraftCount` runs.
+- `MaximumCraftableCount`: maximum number of times this recipe could be crafted with current stock.
+- `Ingredients`: per-ingredient `RequiredQuantity`, `AvailableQuantity`, `MissingQuantity`, `IsSatisfied`.
 
 ### Preview craft (Pro+)
 
@@ -141,7 +141,7 @@ var result = await client.CraftItemsAsync(
 
 ## Station Enforcement
 
-If a recipe has a non-empty `requiredStation`, the server calls `IRecipeStationPolicy.IsAtRequiredStation(actorContext, recipe)`. The default implementation (`DefaultRecipeStationPolicy`) always returns `true` — override it via DI to add real station proximity checks.
+If a recipe has a non-empty `requiredStation`, the server calls `IRecipeStationPolicy.IsAtRequiredStation(actorContext, recipe)`. The default implementation (`DefaultRecipeStationPolicy`) always returns `true`; override it via DI to add real station proximity checks.
 
 ---
 

@@ -20,7 +20,7 @@ This guide covers adding InventoryFramework to a Unity project using the `Invent
 
 ## Installation
 
-### Option A — NuGetForUnity (recommended)
+### Option A: NuGetForUnity (recommended)
 
 Install [NuGetForUnity](https://github.com/GlitchEnzo/NuGetForUnity) from the Unity Package Manager, then search for and install:
 
@@ -28,9 +28,9 @@ Install [NuGetForUnity](https://github.com/GlitchEnzo/NuGetForUnity) from the Un
 
 This pulls in `InventoryFramework.SDK` and all gRPC dependencies automatically.
 
-### Option B — Manual DLL install
+### Option B: Manual DLL install
 
-Download `InventoryFramework.UnityAdapter` from [NuGet.org](https://www.nuget.org/packages/InventoryFramework.UnityAdapter). A `.nupkg` file is a zip archive — rename it to `.zip`, open it, and copy the contents of `lib/netstandard2.1/` to `Assets/Plugins/InventoryFramework/` in your Unity project.
+Download `InventoryFramework.UnityAdapter` from [NuGet.org](https://www.nuget.org/packages/InventoryFramework.UnityAdapter). A `.nupkg` file is a zip archive; rename it to `.zip`, open it, and copy the contents of `lib/netstandard2.1/` to `Assets/Plugins/InventoryFramework/` in your Unity project.
 
 Required DLLs:
 - `InventoryFramework.SDK.dll`
@@ -105,7 +105,7 @@ var result = await _facade.TransferItemsAsync(
     quantity: 5);
 ```
 
-### Quick-store (backpack → chest)
+### Quick-store (backpack to chest)
 
 ```csharp
 var result = await _facade.QuickStoreToTargetContainerAsync(
@@ -259,8 +259,8 @@ For longer play sessions, use `UnityInventorySessionController` which wraps the 
 ```csharp
 var controller = new UnityInventorySessionController(facade);
 await controller.StartSessionAsync();
-// controller.State.Snapshot — current inventory
-// controller.State.IsConnected — connection health
+// controller.State.Snapshot    = current inventory
+// controller.State.IsConnected = connection health
 ```
 
 ---

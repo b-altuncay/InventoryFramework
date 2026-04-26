@@ -147,7 +147,7 @@ await connection.InvokeAsync("SubscribeToInventory", inventoryId);
 
 ## Godot example
 
-Godot 4 C# projects can use the official `Microsoft.AspNetCore.SignalR.Client` NuGet package directly — no third-party library needed.
+Godot 4 C# projects can use the official `Microsoft.AspNetCore.SignalR.Client` NuGet package directly, no third-party library needed.
 
 Add to your `.csproj`:
 

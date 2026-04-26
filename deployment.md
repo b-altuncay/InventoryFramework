@@ -8,9 +8,9 @@ nav_order: 3
 
 ---
 
-## Option A — Pre-built Demo binary (no Docker, no license required)
+## Option A: Pre-built Demo binary (no Docker, no license required)
 
-The fastest way to evaluate InventoryFramework. Download the binary, run it — no setup needed.
+The fastest way to evaluate InventoryFramework. Download the binary and run it, no setup needed.
 
 ### 1. Download
 
@@ -27,7 +27,7 @@ Go to the [latest GitHub Release](https://github.com/b-altuncay/InventoryFramewo
 
 **Windows:**
 ```
-Unzip → double-click start-demo.bat
+Unzip, then double-click start-demo.bat
 ```
 
 **Linux:**
@@ -72,7 +72,7 @@ Edit `appsettings.json` before running:
 
 ### 5. Upgrade to Pro
 
-1. [Activate your license](https://inventoryframework-license.mbaltuncay99.workers.dev/activate) — download `license.json`
+1. [Activate your license](https://inventoryframework-license.mbaltuncay99.workers.dev/activate) to download `license.json`
 2. Place `license.json` next to the server executable
 3. Set `INVENTORY_TIER=Pro` and restart:
 
@@ -89,7 +89,7 @@ INVENTORY_TIER=Pro ./InventoryFramework.Server
 
 ---
 
-## Option B — Docker (recommended for production)
+## Option B: Docker (recommended for production)
 
 This guide covers self-hosting the InventoryFramework server in production using Docker.
 
@@ -144,7 +144,7 @@ InventoryFramework.Server/Data/
 
 ### B.4. Configure API keys
 
-Edit `InventoryFramework.Server/appsettings.json` — replace the placeholder keys:
+Edit `InventoryFramework.Server/appsettings.json` and replace the placeholder keys:
 
 ```json
 "Auth": {
@@ -190,7 +190,7 @@ curl http://localhost:5210/health
 
 ## TLS in production
 
-### Option A — Caddy (recommended, automatic Let's Encrypt)
+### Option A: Caddy (recommended, automatic Let's Encrypt)
 
 ```yaml
 # caddy/Caddyfile
@@ -220,7 +220,7 @@ Update your SDK clients to use `https://inventory.yourdomain.com`:
 ServerAddress = "https://inventory.yourdomain.com"
 ```
 
-### Option B — nginx + certbot
+### Option B: nginx + certbot
 
 ```nginx
 server {
@@ -236,7 +236,7 @@ server {
 }
 ```
 
-### Option C — Direct Kestrel TLS (VPS without reverse proxy)
+### Option C: Direct Kestrel TLS (VPS without reverse proxy)
 
 Obtain a certificate (e.g. via `certbot certonly --standalone`) and convert to PFX:
 
@@ -321,15 +321,15 @@ The server runs EF Core migrations automatically on startup.
 |---|---|---|
 | `INVENTORY_TIER` | `Demo` | Active tier when no valid license is found. Values: `Demo`, `Pro`, `Enterprise` |
 | `ASPNETCORE_ENVIRONMENT` | `Production` | `Development` disables API key requirement |
-| `ASPNETCORE_Kestrel__Certificates__Default__Path` | — | Path to PFX cert inside container |
-| `ASPNETCORE_Kestrel__Certificates__Default__Password` | — | PFX certificate password |
-| `InventoryFramework__LicensePath` | — | Path to `license.json` |
+| `ASPNETCORE_Kestrel__Certificates__Default__Path` | (none) | Path to PFX cert inside container |
+| `ASPNETCORE_Kestrel__Certificates__Default__Password` | (none) | PFX certificate password |
+| `InventoryFramework__LicensePath` | (none) | Path to `license.json` |
 | `InventoryFramework__Persistence__Type` | `File` | `File`, `Sqlite`, `SqlServer`, `PostgreSql` |
-| `InventoryFramework__Persistence__ConnectionString` | — | DB connection string |
+| `InventoryFramework__Persistence__ConnectionString` | (none) | DB connection string |
 | `InventoryFramework__RateLimit__PermitLimit` | `300` | Requests allowed per window |
 | `InventoryFramework__RateLimit__Window` | `00:01:00` | Rate limit window (TimeSpan) |
 | `InventoryFramework__Auth__RequireApiKey` | `true` | Set to `false` for development only |
-| `OpenTelemetry__OtlpEndpoint` | — | OTLP exporter endpoint (optional) |
+| `OpenTelemetry__OtlpEndpoint` | (none) | OTLP exporter endpoint (optional) |
 
 ---
 

@@ -12,7 +12,7 @@ This guide covers adding InventoryFramework to a Godot 4 project using C#.
 
 ## Requirements
 
-- Godot 4.x with .NET enabled (the "Mono" / C# build — not GDScript-only)
+- Godot 4.x with .NET enabled (the Mono / C# build, not GDScript-only)
 - .NET runtime: Godot 4.0–4.2 ships with .NET 6; Godot 4.3+ ships with .NET 8. Either works with InventoryFramework.GodotAdapter.
 - A running InventoryFramework server (see [server-configuration.md](server-configuration.md))
 
@@ -77,7 +77,7 @@ public partial class InventoryManager : Node
 }
 ```
 
-Register `InventoryManager` as an autoload in **Project → Project Settings → Autoload**.
+Register `InventoryManager` as an autoload in **Project > Project Settings > Autoload**.
 
 ---
 

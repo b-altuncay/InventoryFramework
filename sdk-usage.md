@@ -6,7 +6,7 @@ nav_order: 1
 
 # SDK Usage (Plain C#)
 
-`InventoryFramework.SDK` is a `netstandard2.1` client library that works in any .NET project — console apps, ASP.NET Core backends, test harnesses — without requiring Unity or Godot.
+`InventoryFramework.SDK` is a `netstandard2.1` client library that works in any .NET project (console apps, ASP.NET Core backends, test harnesses) without requiring Unity or Godot.
 
 ---
 
@@ -201,7 +201,7 @@ Common error codes:
 | Code | Meaning |
 |---|---|
 | `not_found` | The inventory or recipe does not exist. |
-| `concurrency_conflict` | The inventory was modified concurrently — retry. |
+| `concurrency_conflict` | The inventory was modified concurrently; retry after re-fetching. |
 | `insufficient_ingredients` | Not enough items to craft. |
 | `feature_disabled` | The feature is off in server config or the license tier is too low. |
 | `unauthorized` | Missing or invalid API key. |

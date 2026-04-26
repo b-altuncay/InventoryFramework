@@ -69,7 +69,7 @@ var result = await facade.TransferItemsAsync(
     quantity: 5);
 ```
 
-### Quick-store (backpack → chest)
+### Quick-store (backpack to chest)
 
 ```csharp
 var result = await facade.QuickStoreToTargetContainerAsync(
@@ -79,7 +79,7 @@ var result = await facade.QuickStoreToTargetContainerAsync(
 
 ### Lock / unlock a slot
 
-Locked slots are skipped by quick-store and sort — useful for pinning a favourite item.
+Locked slots are skipped by quick-store and sort, useful for pinning a favourite item.
 
 ```csharp
 await facade.LockSlotAsync(
@@ -171,8 +171,8 @@ For longer play sessions, `UnrealInventorySessionController` wraps the facade an
 ```csharp
 var controller = new UnrealInventorySessionController(facade);
 await controller.StartSessionAsync();
-// controller.State.Snapshot — current inventory
-// controller.State.IsConnected — connection health
+// controller.State.Snapshot    = current inventory
+// controller.State.IsConnected = connection health
 ```
 
 ---

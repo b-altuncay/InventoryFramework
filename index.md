@@ -13,20 +13,20 @@ nav_order: 1
 
 **Server-authoritative inventory and crafting backend for Unity, Godot, and Unreal Engine.**
 
-One server, three engines, zero vendor lock-in. Define your items in JSON, run the server, connect from any engine in under 10 minutes.
+Define your items in JSON, run the server, and connect from any engine in under 10 minutes.
 
 ---
 
 ## Why InventoryFramework?
 
-Unity's inventory solutions — whether built-in or from the Asset Store — are client-side. That works fine for single-player. The moment you add multiplayer, leaderboards, or a second platform, you hit the same wall every time: the data lives on the client, players can modify it, and syncing it across engines is a custom project of its own.
+Most inventory plugins for game engines keep state on the client. That works for single-player, but once you add multiplayer, leaderboards, or a second target platform, you run into the same problems: players can tamper with client-side data, keeping two engines in sync requires custom code, and swapping engines mid-project means rewriting inventory logic from scratch.
 
-InventoryFramework takes a different approach:
+InventoryFramework runs all inventory and crafting logic on a server you control:
 
-- **All state lives on your server.** Players cannot modify their own inventory outside your game logic. No client-side hacks, no save file editing.
-- **One backend, any engine.** The same server talks to Unity, Godot, and Unreal simultaneously. Switch engines mid-project or ship on multiple platforms without rewriting your inventory logic.
-- **Self-hosted.** Your player data never touches a third-party service. No per-MAU pricing, no outage dependencies, no terms-of-service changes that break your game.
-- **Drop-in ready.** Item definitions are plain JSON files. The server runs with `dotnet run`. You don't need to write a single line of backend code to get started.
+- Item state is stored server-side. Players cannot modify their inventory outside of your game logic, no memory editing or save file tampering.
+- One server handles Unity, Godot, and Unreal at the same time. You can add an engine or switch platforms without touching the backend.
+- You self-host it. Player data stays on your infrastructure, no per-MAU pricing or third-party service dependencies.
+- Item definitions are JSON files. The server starts with `dotnet run` and needs no backend code to get going.
 
 ---
 
@@ -87,7 +87,7 @@ var snapshot = await facade.RefreshAsync();
 Debug.Log($"Items in backpack: {snapshot.Containers[0].Slots.Count(s => !s.IsEmpty)}");
 ```
 
-Same four lines work on Godot and Unreal — just swap the facade class name.
+The same code works on Godot and Unreal; just swap the facade class name.
 
 ---
 
@@ -99,16 +99,16 @@ Same four lines work on Godot and Unreal — just swap the facade class name.
 | File-based persistence | ✓ | ✓ | ✓ |
 | SQLite persistence | | ✓ | ✓ |
 | SQL Server / PostgreSQL | | | ✓ |
-| Unity · Godot · Unreal adapters | ✓ | ✓ | ✓ |
+| Unity, Godot, Unreal adapters | ✓ | ✓ | ✓ |
 | Item affixes (rolled modifiers) | ✓ | ✓ | ✓ |
 | Player progression / recipe unlock keys | | ✓ | ✓ |
 | Real-time events via SignalR | ✓ | ✓ | ✓ |
 | Max slots per container | 20 | Unlimited | Unlimited |
 | Studio license | Single project | Single studio | Multi-studio |
 | Support | Community | E-mail | Priority + SLA |
-| **Pricing** | Free | [Buy license →](https://inventoryframework-license.mbaltuncay99.workers.dev/activate) | [Contact us →](mailto:mbaltuncay99@gmail.com) |
+| **Pricing** | Free | [$80 one-time](https://mbaltuncay.gumroad.com/l/qyeyym) | [Contact us](mailto:mbaltuncay99@gmail.com) |
 
-> **Enterprise** pricing is handled privately — [send an email](mailto:mbaltuncay99@gmail.com) with your studio name and use case.
+> Enterprise pricing is handled privately. [Email us](mailto:mbaltuncay99@gmail.com) with your studio name and use case.
 
 ---
 

@@ -3,8 +3,7 @@
 This directory contains Architecture Decision Records (ADRs) for InventoryFramework.
 
 Each ADR documents a significant architectural decision: the context, the options considered,
-the decision taken, and the consequences. They are append-only — superseded decisions are marked
-as such rather than deleted.
+the decision taken, and the consequences. They are append-only; superseded decisions are marked as such rather than deleted.
 
 ## Index
 

@@ -42,8 +42,8 @@ dotnet test --filter "FullyQualifiedName~ItemStack"
 
 | Project | What it covers |
 |---|---|
-| `Domain.Tests` | Business rules — item stacks, containers, aggregates, affixes |
-| `Application.Tests` | Use-case services — grant, transfer, craft, lock slot, split stack, drop items, sort, progression |
+| `Domain.Tests` | Business rules: item stacks, containers, aggregates, affixes |
+| `Application.Tests` | Use-case services: grant, transfer, craft, lock slot, split stack, drop items, sort, progression |
 | `Infrastructure.Tests` | JSON loaders, recipe registry, station/visibility policies |
 | `Persistence.Tests` | Snapshot mapper, file repositories, SQL repositories |
 | `Server.Tests` | gRPC mapping, auth interceptor, license validation, SignalR |
@@ -57,7 +57,7 @@ dotnet test --filter "FullyQualifiedName~ItemStack"
 
 ## Domain tests
 
-These test the core business logic with no external dependencies at all — just pure C#.
+These test the core business logic with no external dependencies at all, just pure C#.
 
 Location: `InventoryFramework.Domain.Tests/`
 
@@ -147,7 +147,7 @@ These cover the snapshot mapper and the file-based repositories.
 
 Location: `InventoryFramework.Persistence.Tests/`
 
-The SQL repository tests (`Persistence.Tests/Sql/`) use an in-memory SQLite database — no database server needed:
+The SQL repository tests (`Persistence.Tests/Sql/`) use an in-memory SQLite database, no database server needed:
 
 ```csharp
 var options = new DbContextOptionsBuilder<InventoryDbContext>()
@@ -161,7 +161,7 @@ Each test gets a fresh database. Tests are independent and can run in any order.
 
 ## Server tests
 
-These test the gRPC layer in isolation — mapping, auth, licensing — without starting a real HTTP server.
+These test the gRPC layer in isolation (mapping, auth, licensing) without starting a real HTTP server.
 
 Location: `InventoryFramework.Server.Tests/`
 
@@ -226,9 +226,9 @@ The server starts fresh for each test class (`IClassFixture`). Tests within the 
 
 ## Writing a new test
 
-**Domain or Application test** — just add an `[Fact]` or `[Theory]` to the relevant test project. No configuration needed.
+**Domain or Application test:** just add an `[Fact]` or `[Theory]` to the relevant test project. No configuration needed.
 
-**Integration test** — inject `InventoryWebApplicationFactory` via `IClassFixture`. Use `factory.CreateGrpcClient()` to get a connected client.
+**Integration test:** inject `InventoryWebApplicationFactory` via `IClassFixture`. Use `factory.CreateGrpcClient()` to get a connected client.
 
 **Naming convention:**
 
@@ -241,7 +241,7 @@ CraftItems_WhenIngredientsAreMissing_ReturnsInsufficientIngredients
 GetInventory_WhenAggregateDoesNotExist_ReturnsNotFound
 ```
 
-This makes failing tests immediately readable in the output — you know what broke and under what condition without opening the file.
+This makes failing tests immediately readable in the output; you know what broke and under what condition without opening the file.
 
 ---
 
@@ -271,4 +271,4 @@ Coverage is also uploaded automatically on every CI run (see `.github/workflows/
 - **Never share state between tests.** Each test must set up its own data. If a test depends on the order of execution, it will break in CI.
 - **In-memory SQLite resets between tests.** Each `SqlInventoryAggregateRepositoryTests` instance gets a clean database.
 - **Integration tests are slower** (~5 seconds total) because they start an HTTP server. Keep the heavy setup in `IClassFixture` shared across tests in the same class.
-- **Don't mock the domain.** The domain has no external dependencies — test it directly. Mocking `InventoryAggregate` will mask bugs that real usage would catch.
+- **Don't mock the domain.** The domain has no external dependencies; test it directly. Mocking `InventoryAggregate` will mask bugs that real usage would catch.

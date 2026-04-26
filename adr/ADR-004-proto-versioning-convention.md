@@ -1,6 +1,6 @@
 # ADR-004: Proto Versioning via csharp_namespace, not Package Rename
 
-**Status:** Accepted  
+**Status:** Accepted
 **Date:** 2026-04-16
 
 ## Context
@@ -55,16 +55,14 @@ API versioning is achieved through:
 2. **Separate service deployment**: For breaking changes, a new server instance is deployed.
    An API gateway (nginx, Envoy, or Kubernetes ingress) routes `/v2/` traffic to it.
 3. **SDK package version (SemVer)**: The NuGet package version communicates breaking changes
-   to SDK consumers. A major version bump (v1.x.x → v2.0.0) signals a proto-level breaking
+   to SDK consumers. A major version bump (v1.x.x to v2.0.0) signals a proto-level breaking
    change and requires an SDK upgrade.
 
 ## Consequences
 
 - The gRPC endpoint URL (`/inventory.InventoryService/GrantItems`) is stable for all v1.x.x
   SDK releases. Clients do not need to update their channel address on minor upgrades.
-- Future maintainers must not add required fields to existing proto messages — proto3 has no
-  required fields, but default values must never carry semantic meaning (zero ≠ "not set"
-  for business logic purposes). Use wrapper types or `optional` keyword when semantics matter.
+- Future maintainers must not add required fields to existing proto messages (proto3 has no required fields, but default values must never carry semantic meaning; zero is not the same as "not set" for business logic purposes). Use wrapper types or the `optional` keyword when semantics matter.
 - When a true breaking change is needed, create `inventory_v2.proto` with a new service name
   (`InventoryServiceV2`) and register it alongside the existing service in `Program.cs`.
   Deprecation notices go into release notes, not into the proto file.

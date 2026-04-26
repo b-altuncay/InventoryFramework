@@ -47,14 +47,14 @@ The `Microsoft.EntityFrameworkCore.Sqlite` package is already included in the Se
 
 ## SQL Server / PostgreSQL
 
-The `InventoryFramework.Persistence.Sql` project contains no database provider — it only references `Microsoft.EntityFrameworkCore` base packages. This keeps the project portable and avoids bundling providers you don't use.
+The `InventoryFramework.Persistence.Sql` project contains no database provider; it only references `Microsoft.EntityFrameworkCore` base packages. This keeps the project portable and avoids bundling providers you don't use.
 
 To add SQL Server or PostgreSQL support:
 
 **SQL Server:**
 1. Add `Microsoft.EntityFrameworkCore.SqlServer` to `InventoryFramework.Server.csproj`.
 2. Change `Persistence.Type` to `SqlServer` and provide a connection string.
-3. Rebuild and run — migrations apply automatically.
+3. Rebuild and run (migrations apply automatically).
 
 **PostgreSQL:**
 1. Add `Npgsql.EntityFrameworkCore.PostgreSQL` to `InventoryFramework.Server.csproj`.

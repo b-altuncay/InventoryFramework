@@ -1,6 +1,6 @@
 # ADR-002: Snapshot Persistence over Event Sourcing
 
-**Status:** Accepted  
+**Status:** Accepted
 **Date:** 2026-04-16
 
 ## Context
@@ -19,18 +19,18 @@ Move, etc.). This state must be persisted and reloaded reliably. Two dominant pa
 Append `ContainerItemAddedEvent`, `ContainerItemRemovedEvent`, etc. to an event log per
 aggregate. Reconstruct state by replaying the log.
 
-**Pros:**
-- Full audit trail — every change is traceable.
+Pros:
+- Full audit trail, every change is traceable.
 - Time-travel debugging: replay state at any point in time.
 - Natural fit for CQRS read-model projections.
 
-**Cons:**
+Cons:
 - Replay time grows linearly with aggregate history. A chest modified 10,000 times requires
   replaying 10,000 events on every load.
 - Snapshot checkpointing must be added anyway to bound replay time, which partially offsets
   the simplicity advantage.
 - Game inventory aggregates have high write frequency (each item pickup is a mutation) but
-  low auditability requirements — players do not file "item history" disputes.
+  low auditability requirements; players do not file "item history" disputes.
 - Event schema versioning (upcasting) becomes a permanent maintenance burden as the domain
   model evolves.
 - Infrastructure complexity increases significantly (event store, projection workers).
@@ -39,17 +39,14 @@ aggregate. Reconstruct state by replaying the log.
 Serialize the full aggregate state as JSON on every save. Load by deserializing the latest
 snapshot.
 
-**Pros:**
+Pros:
 - Load time is O(1) regardless of aggregate history.
-- Schema evolution is handled by the `InventorySnapshotMapper` which can apply
-  default values for missing fields — no upcasting pipeline required.
-- Provider-agnostic: the same JSON snapshot works with file storage, SQLite, SQL Server,
-  or PostgreSQL without changing domain code.
+- Schema evolution is handled by the `InventorySnapshotMapper` which can apply default values for missing fields, no upcasting pipeline required.
+- Provider-agnostic: the same JSON snapshot works with file storage, SQLite, SQL Server, or PostgreSQL without changing domain code.
 - Simpler infrastructure: no event store, no projection workers, no replay logic.
 
-**Cons:**
-- No built-in audit trail. Domain events are raised but discarded after dispatch unless
-  the Outbox persists them (see ADR-003).
+Cons:
+- No built-in audit trail. Domain events are raised but discarded after dispatch unless the Outbox persists them (see ADR-003).
 - Cannot reconstruct state at an arbitrary past point in time.
 
 ## Decision
