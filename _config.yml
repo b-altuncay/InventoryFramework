@@ -6,7 +6,6 @@ url: "https://b-altuncay.github.io"
 baseurl: "/InventoryFramework"   # change this to match your public repo name
 
 google_site_verification: E7qDdHbTVdOiUGE_PGwOM1JKt0RGuZMSiCoU-HtKUvM
-ga_tracking_id: "G-8624QWB7CB"
 
 color_scheme: dark
 search_enabled: true
