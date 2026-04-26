@@ -2,6 +2,7 @@
 title: Testing Guide
 parent: Development
 nav_order: 1
+description: Run the InventoryFramework test suite. Unit tests, integration tests, adapter E2E tests for Unity, Godot, and Unreal facades against a live server.
 ---
 
 # Testing Guide

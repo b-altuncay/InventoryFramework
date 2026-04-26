@@ -2,6 +2,7 @@
 title: SDK Usage (Plain C#)
 parent: Engine Integrations
 nav_order: 1
+description: Use InventoryFramework.SDK in any .NET project. Server-to-server calls, console apps, ASP.NET Core backends, test harnesses. No Unity or Godot required.
 ---
 
 # SDK Usage (Plain C#)

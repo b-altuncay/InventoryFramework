@@ -2,6 +2,7 @@
 title: Player Progression
 parent: Features
 nav_order: 2
+description: Gate recipe access per player with unlock keys. Grant and revoke recipe tiers from Unity, Godot, or Unreal. Timestamps, progression history, Pro tier feature.
 ---
 
 # Player Progression

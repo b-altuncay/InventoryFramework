@@ -1,6 +1,7 @@
 ---
 title: Home
 nav_order: 1
+description: Self-hosted inventory and crafting backend for Unity, Godot, and Unreal Engine. Server-authoritative .NET server, SQLite/PostgreSQL, real-time SignalR events. Free demo available.
 ---
 
 # InventoryFramework

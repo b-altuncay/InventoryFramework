@@ -2,6 +2,7 @@
 title: Production Deployment
 parent: Getting Started
 nav_order: 3
+description: Deploy InventoryFramework to production with Docker, reverse proxy (Nginx/Caddy), PostgreSQL or SQLite, environment variables, and HTTPS configuration.
 ---
 
 # Production Deployment

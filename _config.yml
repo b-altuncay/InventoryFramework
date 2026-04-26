@@ -20,8 +20,9 @@ aux_links:
     - "https://www.nuget.org/packages/InventoryFramework.UnrealAdapter"
 aux_links_new_tab: true
 
-footer_content: 'Copyright &copy; 2026 Batuhan Altuncay &mdash; <a href="mailto:mbaltuncay99@gmail.com">Contact for licensing</a>'
+footer_content: 'Copyright &copy; 2026 Batuhan Altuncay | <a href="mailto:mbaltuncay99@gmail.com">Contact for licensing</a>'
 
 plugins:
   - jekyll-remote-theme
   - jekyll-seo-tag
+  - jekyll-sitemap

@@ -2,6 +2,7 @@
 title: Crafting & Recipes
 parent: Features
 nav_order: 1
+description: Server-side crafting recipes for game backends. Multi-output recipes, recipe preview, crafting stations, recipe browser, player progression unlock keys. Unity, Godot, Unreal.
 ---
 
 # Crafting & Recipes

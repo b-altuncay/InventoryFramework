@@ -2,6 +2,7 @@
 title: Godot Integration
 parent: Engine Integrations
 nav_order: 3
+description: Add server-authoritative inventory and crafting to Godot 4 C# using the InventoryFramework NuGet adapter. Item stacking, crafting, slot locking, SignalR events. Godot 4 .NET 6/8.
 ---
 
 # Godot Integration Guide

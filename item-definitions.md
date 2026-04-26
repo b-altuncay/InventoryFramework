@@ -2,6 +2,7 @@
 title: Item Definitions
 parent: Getting Started
 nav_order: 2
+description: Define game items as JSON files. Stack size, weight, durability, tags, item affixes (rolled modifiers), and restriction rules for the InventoryFramework server.
 ---
 
 # Item Definitions

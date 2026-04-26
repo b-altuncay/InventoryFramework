@@ -2,6 +2,7 @@
 title: Persistence
 parent: Features
 nav_order: 3
+description: InventoryFramework persistence backends: file-based JSON (Demo/Pro), SQLite (Pro), PostgreSQL and SQL Server (Enterprise). EF Core migrations included.
 ---
 
 # Persistence

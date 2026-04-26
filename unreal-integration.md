@@ -2,6 +2,7 @@
 title: Unreal Integration
 parent: Engine Integrations
 nav_order: 4
+description: Add server-authoritative inventory and crafting to Unreal Engine 5 using the InventoryFramework C# NuGet adapter. Item stacking, crafting, slot locking, real-time SignalR events.
 ---
 
 # Unreal Engine Integration Guide

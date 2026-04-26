@@ -2,6 +2,7 @@
 title: SignalR Events
 parent: Features
 nav_order: 4
+description: Real-time inventory events via SignalR in Unity, Godot, and Unreal. Subscribe to item grants, transfers, crafting, and slot changes without polling.
 ---
 
 # SignalR Real-Time Events

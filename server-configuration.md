@@ -2,6 +2,7 @@
 title: Server Configuration
 parent: Getting Started
 nav_order: 1
+description: Configure the InventoryFramework server. API keys, database connection strings, item/recipe paths, feature flags, container capacity, weight limits, and HTTPS settings.
 ---
 
 # Server Configuration

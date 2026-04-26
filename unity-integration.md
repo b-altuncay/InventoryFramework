@@ -2,6 +2,7 @@
 title: Unity Integration
 parent: Engine Integrations
 nav_order: 2
+description: Add server-authoritative inventory and crafting to Unity using the InventoryFramework NuGet adapter. Item stacking, crafting, slot locking, SignalR events. Unity 2021.3+.
 ---
 
 # Unity Integration Guide
@@ -211,7 +212,7 @@ foreach (var container in snapshot.Containers)
     {
         if (!slot.IsEmpty && slot.CurrentDurability.HasValue)
         {
-            Debug.Log($"Slot {slot.Index}: {slot.ItemDefinitionId} — " +
+            Debug.Log($"Slot {slot.Index}: {slot.ItemDefinitionId}, " +
                       $"durability {slot.CurrentDurability.Value:F1}");
         }
     }
