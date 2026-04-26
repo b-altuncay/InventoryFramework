@@ -1,0 +1,106 @@
+<svg width="1200" height="450" xmlns="http://www.w3.org/2000/svg"
+     font-family="Arial, sans-serif">
+  <defs>
+    <style>text { font-family: Arial, sans-serif; }</style>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="5"
+                    flood-color="#0F172A" flood-opacity="0.09"/>
+    </filter>
+    <marker id="arr" markerWidth="9" markerHeight="7"
+            refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0,9 3.5,0 7" fill="#64748B"/>
+    </marker>
+    <marker id="arr-purple" markerWidth="9" markerHeight="7"
+            refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0,9 3.5,0 7" fill="#7C3AED"/>
+    </marker>
+    <clipPath id="cl-l"><rect x="40"  y="70" width="200" height="315" rx="14"/></clipPath>
+    <clipPath id="cl-c"><rect x="315" y="70" width="570" height="315" rx="14"/></clipPath>
+    <clipPath id="cl-r"><rect x="960" y="107" width="205" height="240" rx="14"/></clipPath>
+  </defs>
+
+  <rect width="1200" height="450" fill="#F8FAFC"/>
+
+  <text x="600" y="46" text-anchor="middle"
+        font-size="18" font-weight="700" fill="#0F172A">
+    InventoryFramework — Architecture Overview
+  </text>
+
+  <!-- LEFT CARD -->
+  <rect x="40" y="70" width="200" height="315" rx="14" fill="white" filter="url(#shadow)"/>
+  <rect x="40" y="70" width="200" height="50" fill="#2563EB" clip-path="url(#cl-l)"/>
+  <text x="140" y="102" text-anchor="middle" font-size="13" font-weight="700" fill="white">Game Engines</text>
+  <rect x="58" y="135" width="164" height="60" rx="9" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1.5"/>
+  <text x="140" y="161" text-anchor="middle" font-size="14" font-weight="600" fill="#1E3A8A">Unity</text>
+  <text x="140" y="179" text-anchor="middle" font-size="11" fill="#64748B">C# · NuGet package</text>
+  <rect x="58" y="210" width="164" height="60" rx="9" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1.5"/>
+  <text x="140" y="236" text-anchor="middle" font-size="14" font-weight="600" fill="#1E3A8A">Godot</text>
+  <text x="140" y="254" text-anchor="middle" font-size="11" fill="#64748B">C# · NuGet package</text>
+  <rect x="58" y="285" width="164" height="60" rx="9" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1.5"/>
+  <text x="140" y="311" text-anchor="middle" font-size="14" font-weight="600" fill="#1E3A8A">Unreal</text>
+  <text x="140" y="329" text-anchor="middle" font-size="11" fill="#64748B">C# · NuGet package</text>
+
+  <!-- ARROWS -->
+  <line x1="244" y1="220" x2="312" y2="220" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="278" y="215" text-anchor="middle" font-size="9" fill="#64748B">NuGet adapter</text>
+  <line x1="312" y1="234" x2="244" y2="234" stroke="#7C3AED" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-purple)"/>
+  <text x="278" y="248" text-anchor="middle" font-size="9" fill="#7C3AED">SignalR events</text>
+
+  <!-- CENTER CARD -->
+  <rect x="315" y="70" width="570" height="315" rx="14" fill="white" filter="url(#shadow)"/>
+  <rect x="315" y="70" width="570" height="50" fill="#059669" clip-path="url(#cl-c)"/>
+  <text x="600" y="102" text-anchor="middle" font-size="13" font-weight="700" fill="white">InventoryFramework Server</text>
+
+  <rect x="330" y="133" width="170" height="165" rx="9" fill="#F0FDF4" stroke="#6EE7B7" stroke-width="1.5"/>
+  <text x="342" y="154" font-size="12" font-weight="700" fill="#065F46">Inventory</text>
+  <line x1="338" y1="163" x2="492" y2="163" stroke="#BBF7D0" stroke-width="1"/>
+  <text x="342" y="180" font-size="11" fill="#374151">CRUD operations</text>
+  <text x="342" y="198" font-size="11" fill="#374151">Stacking &amp; splitting</text>
+  <text x="342" y="216" font-size="11" fill="#374151">Slot locking &amp; sorting</text>
+  <text x="342" y="234" font-size="11" fill="#374151">Item affixes</text>
+  <text x="342" y="252" font-size="11" fill="#374151">Trading system</text>
+  <text x="342" y="270" font-size="11" fill="#374151">Concurrency-safe</text>
+
+  <rect x="515" y="133" width="170" height="165" rx="9" fill="#F0FDF4" stroke="#6EE7B7" stroke-width="1.5"/>
+  <text x="527" y="154" font-size="12" font-weight="700" fill="#065F46">Crafting</text>
+  <line x1="523" y1="163" x2="677" y2="163" stroke="#BBF7D0" stroke-width="1"/>
+  <text x="527" y="180" font-size="11" fill="#374151">Multi-output recipes</text>
+  <text x="527" y="198" font-size="11" fill="#374151">Recipe preview</text>
+  <text x="527" y="216" font-size="11" fill="#374151">Crafting stations</text>
+  <text x="527" y="234" font-size="11" fill="#374151">Recipe browser API</text>
+  <text x="527" y="252" font-size="11" fill="#374151">Unlock key system</text>
+  <text x="527" y="270" font-size="11" fill="#374151">Availability check</text>
+
+  <rect x="700" y="133" width="170" height="165" rx="9" fill="#F0FDF4" stroke="#6EE7B7" stroke-width="1.5"/>
+  <text x="712" y="154" font-size="12" font-weight="700" fill="#065F46">License Gate</text>
+  <line x1="708" y1="163" x2="862" y2="163" stroke="#BBF7D0" stroke-width="1"/>
+  <text x="712" y="180" font-size="11" fill="#374151">RSA-2048 signed</text>
+  <text x="712" y="198" font-size="11" fill="#374151">Demo: 3 actors, 50 items</text>
+  <text x="712" y="216" font-size="11" fill="#374151">Pro: Unlimited</text>
+  <text x="712" y="234" font-size="11" fill="#374151">Enterprise: Custom</text>
+  <text x="712" y="252" font-size="11" fill="#374151">Offline validation</text>
+  <text x="712" y="270" font-size="11" fill="#374151">Rate limiting</text>
+
+  <rect x="330" y="314" width="555" height="44" rx="8" fill="#EDE9FE"/>
+  <text x="607" y="331" text-anchor="middle" font-size="11" font-weight="700" fill="#5B21B6">SignalR — Real-time Events</text>
+  <text x="607" y="349" text-anchor="middle" font-size="10" fill="#6D28D9">ItemAdded  ·  ItemRemoved  ·  CraftCompleted  ·  SlotMoved</text>
+
+  <!-- ARROW Server -> DB -->
+  <line x1="888" y1="227" x2="957" y2="227" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="896" y="217" width="52" height="20" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="922" y="231" text-anchor="middle" font-size="10" fill="#475569">persists</text>
+
+  <!-- RIGHT CARD -->
+  <rect x="960" y="107" width="205" height="240" rx="14" fill="white" filter="url(#shadow)"/>
+  <rect x="960" y="107" width="205" height="50" fill="#D97706" clip-path="url(#cl-r)"/>
+  <text x="1062" y="139" text-anchor="middle" font-size="13" font-weight="700" fill="white">Persistence</text>
+  <rect x="1027" y="190" width="70" height="55" fill="#FEF9E7" stroke="none"/>
+  <line x1="1027" y1="190" x2="1027" y2="245" stroke="#D97706" stroke-width="1.5"/>
+  <line x1="1097" y1="190" x2="1097" y2="245" stroke="#D97706" stroke-width="1.5"/>
+  <ellipse cx="1062" cy="245" rx="35" ry="10" fill="#FEF9E7" stroke="#D97706" stroke-width="1.5"/>
+  <ellipse cx="1062" cy="190" rx="35" ry="10" fill="#FDE68A" stroke="#D97706" stroke-width="1.5"/>
+  <text x="1062" y="272" text-anchor="middle" font-size="12" font-weight="600" fill="#92400E">SQLite / PostgreSQL</text>
+  <text x="1062" y="291" text-anchor="middle" font-size="10" fill="#B45309">EF Core + Outbox</text>
+  <text x="1062" y="309" text-anchor="middle" font-size="10" fill="#B45309">File-based available</text>
+  <text x="1062" y="327" text-anchor="middle" font-size="10" fill="#B45309">SQL Server supported</text>
+</svg>

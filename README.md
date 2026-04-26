@@ -1,29 +1,40 @@
-# InventoryFramework
+<div align="center">
+  <img src="banner.svg" alt="InventoryFramework" width="100%">
+</div>
 
-[![NuGet](https://img.shields.io/nuget/v/InventoryFramework.SDK?label=SDK)](https://www.nuget.org/packages/InventoryFramework.SDK)
-[![NuGet](https://img.shields.io/nuget/v/InventoryFramework.UnityAdapter?label=Unity)](https://www.nuget.org/packages/InventoryFramework.UnityAdapter)
-[![NuGet](https://img.shields.io/nuget/v/InventoryFramework.GodotAdapter?label=Godot)](https://www.nuget.org/packages/InventoryFramework.GodotAdapter)
-[![NuGet](https://img.shields.io/nuget/v/InventoryFramework.UnrealAdapter?label=Unreal)](https://www.nuget.org/packages/InventoryFramework.UnrealAdapter)
-[![License](https://img.shields.io/badge/license-Commercial-red)](mailto:mbaltuncay99@gmail.com)
+<br>
 
-**Server-authoritative inventory and crafting backend for Unity, Godot, and Unreal Engine.**
+<div align="center">
 
-One server, three engines, zero vendor lock-in. Define your items in JSON, run the server, connect from any engine in under 10 minutes.
+[![SDK](https://img.shields.io/nuget/v/InventoryFramework.SDK?label=SDK&color=059669)](https://www.nuget.org/packages/InventoryFramework.SDK)
+[![Unity](https://img.shields.io/nuget/v/InventoryFramework.UnityAdapter?label=Unity&color=059669)](https://www.nuget.org/packages/InventoryFramework.UnityAdapter)
+[![Godot](https://img.shields.io/nuget/v/InventoryFramework.GodotAdapter?label=Godot&color=059669)](https://www.nuget.org/packages/InventoryFramework.GodotAdapter)
+[![Unreal](https://img.shields.io/nuget/v/InventoryFramework.UnrealAdapter?label=Unreal&color=059669)](https://www.nuget.org/packages/InventoryFramework.UnrealAdapter)
+[![Release](https://img.shields.io/github/v/release/b-altuncay/InventoryFramework?label=release&color=0F172A)](https://github.com/b-altuncay/InventoryFramework/releases/latest)
+[![License](https://img.shields.io/badge/license-Commercial-dc2626)](mailto:mbaltuncay99@gmail.com)
 
-> Full documentation: **[https://b-altuncay.github.io/InventoryFramework](https://b-altuncay.github.io/InventoryFramework)**
+**[Documentation](https://b-altuncay.github.io/InventoryFramework)** · **[Get a license](https://mbaltuncay.gumroad.com/l/qyeyym)** · **[Discussions](https://github.com/b-altuncay/InventoryFramework/discussions)**
+
+</div>
 
 ---
 
 ## Why InventoryFramework?
 
-Unity's inventory solutions — whether built-in or from the Asset Store — are client-side. That works fine for single-player. The moment you add multiplayer, leaderboards, or a second platform, you hit the same wall every time: the data lives on the client, players can modify it, and syncing it across engines is a custom project of its own.
+Unity's inventory solutions — and most game engine equivalents — are client-side. That works fine for single-player. The moment you add multiplayer, leaderboards, or a second platform, you hit the same wall: the data lives on the client, players can modify it, and syncing it across engines is a custom project of its own.
 
 InventoryFramework takes a different approach:
 
 - **All state lives on your server.** Players cannot modify their own inventory outside your game logic. No client-side hacks, no save file editing.
 - **One backend, any engine.** The same server talks to Unity, Godot, and Unreal simultaneously. Switch engines mid-project or ship on multiple platforms without rewriting your inventory logic.
-- **Self-hosted.** Your player data never touches a third-party service. No per-MAU pricing, no outage dependencies, no terms-of-service changes that break your game.
-- **Drop-in ready.** Item definitions are plain JSON files. The server runs with `dotnet run`. You don't need to write a single line of backend code to get started.
+- **Self-hosted.** Your player data never touches a third-party service. No per-MAU pricing, no outage dependencies, no vendor terms changes that break your game.
+- **Drop-in ready.** Item definitions are plain JSON. The server runs with `dotnet run`. No backend code required to get started.
+
+<br>
+
+<div align="center">
+  <img src="architecture.svg" alt="Architecture Overview" width="100%">
+</div>
 
 ---
 
@@ -74,7 +85,7 @@ var snapshot = await facade.RefreshAsync();
 Debug.Log($"Items in backpack: {snapshot.Containers[0].Slots.Count(s => !s.IsEmpty)}");
 ```
 
-Same lines work on Godot and Unreal — just swap the facade class name.
+Same code works on Godot and Unreal — just swap the facade class name.
 
 ---
 
@@ -82,18 +93,18 @@ Same lines work on Godot and Unreal — just swap the facade class name.
 
 | | Demo | Pro | Enterprise |
 |---|:---:|:---:|:---:|
-| Binary (server + SDK + adapters) | ✓ | ✓ | ✓ |
+| Server binary + SDK + engine adapters | ✓ | ✓ | ✓ |
 | File-based persistence | ✓ | ✓ | ✓ |
 | SQLite persistence | | ✓ | ✓ |
 | SQL Server / PostgreSQL | | | ✓ |
 | Unity · Godot · Unreal adapters | ✓ | ✓ | ✓ |
 | Item affixes (rolled modifiers) | ✓ | ✓ | ✓ |
-| Player progression / recipe unlock keys | | ✓ | ✓ |
+| Player progression & recipe unlock keys | | ✓ | ✓ |
 | Real-time events via SignalR | ✓ | ✓ | ✓ |
 | Max slots per container | 20 | Unlimited | Unlimited |
 | Studio license | Single project | Single studio | Multi-studio |
 | Support | Community | E-mail | Priority + SLA |
-| **Pricing** | Free | [Buy license →](https://inventoryframework-license.mbaltuncay99.workers.dev/activate) | [Contact us →](mailto:mbaltuncay99@gmail.com) |
+| **Pricing** | **Free** | **[$80 one-time →](https://mbaltuncay.gumroad.com/l/qyeyym)** | **[Contact →](mailto:mbaltuncay99@gmail.com)** |
 
 > **Enterprise** pricing is handled privately — [send an email](mailto:mbaltuncay99@gmail.com) with your studio name and use case.
 
@@ -103,14 +114,24 @@ Same lines work on Godot and Unreal — just swap the facade class name.
 
 | | |
 |---|---|
-| [Server Configuration](docs/server-configuration.md) | API keys, paths, persistence backends |
-| [Item Definitions](docs/item-definitions.md) | JSON schema, durability, weight, tags |
-| [Crafting & Recipes](docs/crafting.md) | Recipe format, partial crafting, unlock keys |
-| [Player Progression](docs/progression.md) | Recipe unlock keys, grant and revoke |
-| [Persistence](docs/persistence.md) | File, SQLite, SQL Server, PostgreSQL |
-| [SDK Usage](docs/sdk-usage.md) | Plain C# client, DI, error handling |
-| [Unity Integration](docs/unity-integration.md) | Installation, MonoBehaviour setup |
-| [Godot Integration](docs/godot-integration.md) | Installation, Node setup |
-| [Unreal Integration](docs/unreal-integration.md) | Installation, facade setup |
-| [SignalR Events](docs/signalr-events.md) | Real-time inventory change notifications |
-| [Testing Guide](docs/testing.md) | Running tests, test projects, writing new tests |
+| [Getting Started](getting-started.md) | First server run, item definitions, first request |
+| [Server Configuration](server-configuration.md) | API keys, paths, persistence backends |
+| [Item Definitions](item-definitions.md) | JSON schema, durability, weight, tags |
+| [Crafting & Recipes](crafting.md) | Recipe format, partial crafting, unlock keys |
+| [Player Progression](progression.md) | Recipe unlock keys, grant and revoke |
+| [Persistence](persistence.md) | File, SQLite, SQL Server, PostgreSQL |
+| [Deployment](deployment.md) | Docker, TLS, reverse proxy, env vars |
+| [SDK Usage](sdk-usage.md) | Plain C# client, DI, error handling |
+| [Unity Integration](unity-integration.md) | Installation, MonoBehaviour setup |
+| [Godot Integration](godot-integration.md) | Installation, Node setup |
+| [Unreal Integration](unreal-integration.md) | Installation, facade setup |
+| [SignalR Events](signalr-events.md) | Real-time inventory change notifications |
+| [Testing Guide](testing.md) | Running tests, test projects, writing new tests |
+
+---
+
+<div align="center">
+
+Questions? Open a thread in **[Discussions](https://github.com/b-altuncay/InventoryFramework/discussions)** or email [mbaltuncay99@gmail.com](mailto:mbaltuncay99@gmail.com).
+
+</div>
